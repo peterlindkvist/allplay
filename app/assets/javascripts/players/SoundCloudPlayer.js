@@ -1,6 +1,11 @@
 var players = window.players || {};
 
-players.SoundCloudPlayer = function(url) {
+/**
+ * @param boolean autoInitialize Defaults to true
+ */
+players.SoundCloudPlayer = function(url, autoInitialize) {
+  if (autoInitialize === undefined) autoInitialize = true;
+
   this.callback = new players.PlayerCallback();
   //on the api playback event call this.callback.onEnd() ...
 
@@ -11,11 +16,13 @@ players.SoundCloudPlayer = function(url) {
   };
 
   var self = this;
-  this.setupSDK(function() {
-    self.prepareForPlayback(function() {
-      self.onReady();
+  if (autoInitialize) {
+    this.setupSDK(function() {
+      self.prepareForPlayback(function() {
+        self.onReady();
+      });
     });
-  });
+  }
 };
 
 players.SoundCloudPlayer.prototype.setupSDK = function(callback) {
@@ -173,4 +180,13 @@ players.SoundCloudPlayer.prototype.getPosition = function() {
  */
 players.SoundCloudPlayer.supportsURL = function(url) {
   return url.indexOf("soundcloud.com") > -1;
+};
+players.SoundCloudPlayer.getMetaData = function(url, callback) {
+  var p = new players.SoundCloudPlayer(url, false);
+  p.setupSDK(function() {
+    SC.get("/resolve", { url: url }, function(trackData) {
+      $.extend(trackData, { type: "soundcloud" });
+      callback(trackData);
+    });
+  });
 };
