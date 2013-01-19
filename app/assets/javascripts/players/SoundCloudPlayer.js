@@ -169,7 +169,7 @@ players.SoundCloudPlayer.prototype.getDuration = function() {
  */
 players.SoundCloudPlayer.prototype.getPosition = function() {
   var position = 0;
-  if (!this._soundObj.loadedSound.position) return position;
+  if (!this._soundObj.loadedSound.loaded) return position;
   position = this._soundObj.loadedSound.position;
 
   return position / 1000;
