@@ -15,13 +15,12 @@ PlayerFactory.resolve = function(url){
   return new players.IPlayer(url);
 }
 
-PlayerFactory.getMetadata = function(url, callback){
+PlayerFactory.getMetaData = function(url, callback){
   if (players.YoutubePlayer.supportsURL(url))
     return players.YoutubePlayer.getMetaData(url, callback);
 
-  if (players.SoundCloudPlayer.supportsURL(url)) {
-    return players.BasicPlayer.getMetaData(url, callback);
-  }
+  if (players.SoundCloudPlayer.supportsURL(url))
+    return players.SoundCloudPlayer.getMetaData(url, callback);
 
   if (players.BasicPlayer.supportsURL(url))
     return players.BasicPlayer.getMetaData(url, callback);
