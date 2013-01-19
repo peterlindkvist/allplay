@@ -1,17 +1,19 @@
-<h2 class="bold">Currently playing: &ldquo;{{name}}&ldquo;</h2>
-<a href="#play" class="js-play_button">Play</a>
-<a href="#pause" class="js-pause_button">Pause</a>
-<a href="#stop" class="js-stop_button">Stop</a>
-/
-<a href="#previous" class="js-previous_button">Previous</a>
-<a href="#next" class="js-next_button">Next</a>
-<ul class="margin_top_1 b">
+<div class="units u2">
+  <h2 class="unit lh1_2 margin_bottom_1">
+    <span class="text_almost_white block">Currently playing</span>
+    <span class="fs30 bold">{{name}}</span>
+  </h2>
+  <div class="unit align_right">
+    <a href="#play" class="js-play_button">Play</a>
+    <a href="#pause" class="js-pause_button">Pause</a>
+    <a href="#stop" class="js-stop_button">Stop</a>
+    <a href="#previous" class="js-previous_button">Previous</a>
+    <a href="#next" class="js-next_button">Next</a>
+  </div>
+</div>
+<button class="js-add-song fs30 bold width_100 bg_white" style="border: 1px rgb(226, 226, 226) solid">Add Song</button>
+<ul class="margin_top_1">
     {{#each songs}}
     {{> _song }}
     {{/each}}
 </ul>
-<label for="new_song_url">New song: </label><input type="text" id="new_song_url">
-<button class="js-add-song" data-input="new_song_url">Add</button>
-<span class="js-add-song-title"></span>
-<span class="js-add-song-author"></span>
-<span class="js-add-song-duration"></span> sek

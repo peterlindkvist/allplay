@@ -52,14 +52,16 @@ Main.prototype.setupEvents = function() {
       self.loadNext();
     })
     .on("click", ".js-play_item_button", function(e) {
+      e.preventDefault();
+
       self._index = $(this).data('id');
       self._index++;
       self.loadNext();
     })
     .on("click", ".js-add-song", function(e) {
-      var $input = $('#' + $(this).data('input'));
-      var url = $input.val();
-      self.addSong($input.val());
+      //var $input = $('#' + $(this).data('input'));
+      var url = prompt("URL: ");//$input.val();
+      if (url) self.addSong(url);
     });
 
   $(document).on("keyup", function(e) {
@@ -71,6 +73,8 @@ Main.prototype.setupEvents = function() {
 };
 
 Main.prototype.loadNext = function() {
+  if (this._playlist.songs.length === 0) return;
+
   var self = this;
 
   if (this._index === this._playlist.songs.length)
@@ -119,10 +123,7 @@ Main.prototype.play = function(){
 
   if ("play" in this._currentPlayer) this._currentPlayer.play();
 
-  if (this._setPositionInterval) {
-    clearInterval(this._setPositionInterval);
-    this._setPositionInterval = null;
-  }
+  if (this._setPositionInterval) clearInterval(this._setPositionInterval);
   this._setPositionInterval = setInterval(function() {
     self.setCurrentPosition();
     self.setCurrentDuration();
@@ -159,11 +160,10 @@ Main.prototype.stop = function() {
   if ("stop" in this._currentPlayer) this._currentPlayer.stop();
 };
 
-Main.prototype.addSong = function(url){
-  PlayerFactory.getMetaData(url, function(data){
+Main.prototype.addSong = function(url) {
+  var self = this;
 
-    
-    
+  PlayerFactory.getMetaData(url, function(data) {
     var data = {
       song : {
         title : data.title,
@@ -173,18 +173,19 @@ Main.prototype.addSong = function(url){
         url : url,
         list_id : document.location.hash.substr(1)
       }
-    }
-
-    $(".js-list ul").append(Handlebars.partials._song(data.song));
+    };
 
     $.ajax({
       url : '/songs',
       data : data,
       type : 'post',
-      success: function(){
+      success: function() {
         console.log("added");
       }
-    })
+    });
+
+    var template = Handlebars.partials._song($.extend(data.song, { id: self._playlist.songs.length }));
+    $(".js-list ul").append(template);
   });
   //console.log("ADD song not implemented", url);
 };
