@@ -1,5 +1,6 @@
 Main = function(){
 	var self = this;
+
 	$.get('playlist.json', function(){
 		self.start();
 	})
