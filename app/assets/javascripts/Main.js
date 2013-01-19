@@ -15,7 +15,7 @@ Main.prototype.start = function(playlist){
   this._playlist = playlist;
   this._index = 0;
 
-  $(".js-list").html(HandlebarsTemplates['list'](playlist));
+  $(".js-list").html(HandlebarsTemplates.list(playlist));
 
   this.setupEvents();
   this.loadNext();
@@ -160,12 +160,10 @@ Main.prototype.stop = function() {
 };
 
 Main.prototype.addSong = function(url){
-  PlayerFactory.getMetadata(url, function(data){
-    console.log("add", data);
-    $(".js-add-song-title").html(data.title);
-    $(".js-add-song-author").html(data.author);
-    $(".js-add-song-duration").html(data.duration);
+  PlayerFactory.getMetaData(url, function(data){
 
+    
+    
     var data = {
       song : {
         title : data.title,
@@ -176,6 +174,8 @@ Main.prototype.addSong = function(url){
         list_id : document.location.hash.substr(1)
       }
     }
+
+    $(".js-list ul").append(Handlebars.partials._song(data.song));
 
     $.ajax({
       url : '/songs',
