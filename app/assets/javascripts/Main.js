@@ -27,7 +27,7 @@ Main.prototype.setupEvents = function() {
     })
     .on("click", ".js-pause_button", function(e) {
       e.preventDefault();
-      self.play();
+      self.pause();
     })
     .on("click", ".js-stop_button", function(e) {
       e.preventDefault();
@@ -57,6 +57,13 @@ Main.prototype.loadNext = function() {
     console.log("onPause - args: ", arguments);
     // set UI state
   };
+
+	this._currentPlayer.callback.onEnd = function() {
+		console.log("onEnd");
+		self._index ++;
+		self.loadNext();
+		// set UI state
+	};
 };
 
 Main.prototype.play = function(){

@@ -2,40 +2,63 @@ var players = window.players || {};
 
 players.YoutubePlayer = function(url){
 	var self = this;
-	var _domid = "js-player";
+	var _domid = "js-player-inner";
+	$('#js-player').html('<div id="' + _domid + '"></div>');
 	this.callback = new players.PlayerCallback();
 	//on the api playback event call this.callback.onEnd() ...
 
 	window.onYouTubePlayerReady = function(playerId) {
+		console.log("pl", playerId, _domid);
 		var player = document.getElementById(_domid);
+		window.player = player;
 		self._onReady(player);
+	};
+
+	window.onYouTubePlayerStateCallback = function(state){
+		self._onStateCallback(state);
 	};
 
 	var params = { allowScriptAccess: "always" };
 	var atts = { id: _domid };
 	//http://www.youtube.com/watch?v=m3KdpzL3Hkk
 	var video_id = url.split('v=')[1];
-	var full_url = "http://www.youtube.com/v/" + video_id+ "?enablejsapi=1&playerapiid=player&version=3";
-	swfobject.embedSWF(full_url, _domid, "100", "80", "8", null, null, params, atts);
+	var full_url = "http://www.youtube.com/v/" + video_id+ "?enablejsapi=1&playerapiid=ytplayer&version=3";
+	swfobject.embedSWF(full_url, _domid, "200", "200", "8", null, null, params, atts);
 }
 
 players.YoutubePlayer.prototype._onReady = function(player){
 	this._player = player;
-	//player.addEventListener("onStateChange", "youtube_callback");
+	this._player.addEventListener("onStateChange", "onYouTubePlayerStateCallback");
 	this.callback.onReady();
 };
 
-players.YoutubePlayer.prototype.play = function(){
-	console.log("youtubeplay");
-	this._player.play();
+players.YoutubePlayer.prototype._onStateCallback = function(state){
+	console.log("state",state)
+	switch(state){
+		case 0:
+			this.callback.onEnd();
+			break;
+	}
 };
 
 
-players.YoutubePlayer.prototype.pause = function(){};
+players.YoutubePlayer.prototype.play = function(){
+	this._player.playVideo();
+};
+
+
+players.YoutubePlayer.prototype.pause = function(){
+	this._player.pauseVideo();
+};
 
 players.YoutubePlayer.prototype.seek = function(){};
 
-players.YoutubePlayer.prototype.dispose = function(){};
+players.YoutubePlayer.prototype.dispose = function(){
+	this._player.clearVideo();
+	window.onYouTubePlayerReady = null;
+	window.onYouTubePlayerStateCallback = null;
+	$('js-player').html();
+};
 
 players.YoutubePlayer.isSupported = function(url){
 	return url.indexOf("www.youtube.com") != -1;
