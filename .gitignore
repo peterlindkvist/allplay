@@ -17,3 +17,4 @@
 .idea/
 *.iml
 .DS_Store
+.sass-cache/**/*
