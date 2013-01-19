@@ -23,7 +23,7 @@ players.YoutubePlayer = function(url,id){
 	var params = { allowScriptAccess: "always" };
 	var atts = { id: _domid };
 	//http://www.youtube.com/watch?v=m3KdpzL3Hkk
-	var video_id = url.split('v=')[1];
+	var video_id = players.YoutubePlayer._getVideoID(url)
 	var full_url = "http://www.youtube.com/v/" + video_id+ "?enablejsapi=1&playerapiid=ytplayer&version=3";
 	swfobject.embedSWF(full_url, _domid, "200", "200", "8", null, null, params, atts);
 }
@@ -70,4 +70,26 @@ players.YoutubePlayer.prototype.dispose = function(){
 players.YoutubePlayer.supportsURL = function(url){
 	return url.indexOf("www.youtube.com") != -1;
 };
+
+players.YoutubePlayer.getMetadata = function(url, callback){
+  var id = players.YoutubePlayer._getVideoID(url);
+
+  $.ajax({
+    url: "http://gdata.youtube.com/feeds/api/videos/" + id + "?v=2&alt=json",
+    dataType: "jsonp",
+    success: function (data) {
+      var ret = {
+        title: data.entry.title.$t,
+        author: data.entry.author[0].name.$t,
+        duration: data.entry.media$group.yt$duration.seconds
+      }
+      callback.call(null, ret);
+    }
+  });
+
+};
+
+players.YoutubePlayer._getVideoID = function(url){
+  return url.split('v=')[1];
+}
 
