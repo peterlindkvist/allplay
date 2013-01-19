@@ -159,7 +159,10 @@ Main.prototype.stop = function() {
 };
 
 Main.prototype.addSong = function(url){
-  console.log("ADD song not implemented", url);
+  PlayerFactory.getMetadata(url, function(data){
+    console.log("add", data);
+  });
+  //console.log("ADD song not implemented", url);
 };
 
 Main.prototype.setCurrentPosition = function() {
