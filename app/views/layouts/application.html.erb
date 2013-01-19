@@ -3,10 +3,15 @@
 <head>
   <title>Allplay</title>
 
-    <!--script src="http://www.youtube.com/apiplayer?enablejsapi=1&version=3" type="text/javascript"></script-->
 
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+
+  <% if Rails.env.production? %>
+     <script src="/static/application.js?v=0" type="text/javascript"></script>
+     <link href="/static/application.css?v=0" media="all" rel="stylesheet" type="text/css" />
+  <% else %>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+  <% end %>
   <%= csrf_meta_tags %>
 </head>
 <body>
