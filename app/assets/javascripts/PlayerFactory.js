@@ -1,5 +1,3 @@
-window.players = players || {};
-
 PlayerFactory = function(){
 
 	//on the api playback event call this.callback.onEnd() ...
