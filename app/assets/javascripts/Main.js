@@ -159,7 +159,7 @@ Main.prototype.stop = function() {
 };
 
 Main.prototype.addSong = function(url){
-  PlayerFactory.getMetadata(url, function(data){
+  PlayerFactory.getMetaData(url, function(data){
     console.log("add", data);
     $(".js-add-song-title").html(data.title);
     $(".js-add-song-author").html(data.author);
