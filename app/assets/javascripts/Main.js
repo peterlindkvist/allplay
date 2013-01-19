@@ -1,30 +1,23 @@
 Main = function(){
-  var self = this;
+	var self = this;
 
-  $.getJSON('/playlist.json', function(data){
-    self.start(data);
-  });
+	$.getJSON('/playlist.json', function(data){
+		self.start(data);
+	});
 };
 
 
 Main.prototype.start = function(playlist){
-  for(var i = 0; i< playlist.songs.length;i++){
-    playlist.songs[i].id = i;
-  }
-  this._playlist = playlist;
-  this._index = 0;
+	for(var i = 0; i< playlist.songs.length;i++){
+		playlist.songs[i].id = i;
+	}
+	this._playlist = playlist;
+	this._index = 0;
 
-  //this.setupAPICommunication();
-  $(".js-list").html(HandlebarsTemplates['list'](playlist));
+	$(".js-list").html(HandlebarsTemplates['list'](playlist));
 
   this.setupEvents();
-  this.loadNext();
-};
-
-Main.prototype.setupAPICommunication = function() {
-  //if ("soundcloud" in Settings) {
-    //players.SoundCloudPlayer.setupSDK();
-  //}
+	this.loadNext();
 };
 
 Main.prototype.setupEvents = function() {
@@ -47,10 +40,14 @@ Main.prototype.setupEvents = function() {
       e.preventDefault();
       self.loadNext();
     })
-    .on("click", ".js-play_item_button", function(e) {
-      self._index = $(this).data('id');
-      self.loadNext();
-    });
+  .on("click", ".js-play_item_button", function(e) {
+    self._index = $(this).data('id');
+    self.loadNext();
+  }).on("click", ".js-add-song", function(e) {
+    var $input = $('#' + $(this).data('input'));
+    var url = $input.val();
+    self.addSong($input.val());
+  });
 };
 
 Main.prototype.loadNext = function() {
@@ -69,25 +66,22 @@ Main.prototype.loadNext = function() {
 
   this._currentPlayer.callback.onPlay = function(id) {
     console.log("onPlay - args: ", arguments);
-
+  $('.js-list-item-'+id).addClass('playing').removeClass('pausing');
     // set UI state
-    $('.js-list-item-'+id).addClass('playing').removeClass('pausing');
   };
 
   this._currentPlayer.callback.onPause = function(id) {
     console.log("onPause - args: ", arguments);
-
+	$('.js-list-item-'+id).addClass('pausing').removeClass('playing');
     // set UI state
-    $('.js-list-item-'+id).addClass('pausing').removeClass('playing');
   };
 
   this._currentPlayer.callback.onEnd = function(id) {
     console.log("onEnd");
-    self._index++;
+    self._index ++;
     self.loadNext();
-
-    // set UI state
     $('.js-list-item-'+id).removeClass('pausing').removeClass('playing');
+    // set UI state
   };
 };
 
@@ -98,10 +92,14 @@ Main.prototype.play = function(){
 
 Main.prototype.pause = function() {
   if (!this._currentPlayer) return;
-  if ("pause" in this._currentPlayer) this._currentPlayer.pause();
+	if ("pause" in this._currentPlayer) this._currentPlayer.pause();
 };
 
 Main.prototype.stop = function() {
   if (!this._currentPlayer) return;
   if ("stop" in this._currentPlayer) this._currentPlayer.stop();
+};
+
+Main.prototype.addSong = function(url){
+  console.log("ADD song not implemented", url)
 };
