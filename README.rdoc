@@ -4,6 +4,7 @@ CREATE DATABASE allplay_development;
 CREATE DATABASE allplay_production;
 GRANT ALL PRIVILEGES ON DATABASE allplay_development to allplay;
 GRANT ALL PRIVILEGES ON DATABASE allplay_production to allplay;
+/q
 
 == Welcome to Rails
 
