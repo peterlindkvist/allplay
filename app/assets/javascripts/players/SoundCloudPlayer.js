@@ -80,6 +80,8 @@ players.SoundCloudPlayer.prototype.play = function() {
 
   if (this._soundObj.loadedSound.playState === 1 && !this._soundObj.loadedSound.paused) return;  // don't play more than one sound at a time
   this._soundObj.loadedSound.play();
+
+  if (this.callback.onPlay) this.callback.onPlay();
 };
 
 players.SoundCloudPlayer.prototype.pause = function() {
@@ -87,6 +89,8 @@ players.SoundCloudPlayer.prototype.pause = function() {
 
   if (this._soundObj.loadedSound.paused) return;
   this._soundObj.loadedSound.pause();
+
+  if (this.callback.onPause) this.callback.onPause();
 };
 
 players.SoundCloudPlayer.prototype.togglePause = function() {
