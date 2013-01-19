@@ -46,8 +46,8 @@ Main.prototype.loadNext = function() {
 	this._currentPlayer = PlayerFactory.resolve(url);
 
 	this._currentPlayer.callback.onReady = function(){
-		self.startPlaying();
-	} 
+		self.play();
+	};
 
   this._currentPlayer.callback.onPlay = function() {
     console.log("onPlay - args: ", arguments);
