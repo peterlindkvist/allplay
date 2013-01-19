@@ -2,8 +2,8 @@
   "name": "Test Playlist",
   "songs": [
     {
-        "url" : "Ajajaj.wav",
-        "title" : "Ajaj",
+        "url" : "Drommar.wav",
+        "title" : "Drommar",
         "duration": 3600,
         "position": 0
     },

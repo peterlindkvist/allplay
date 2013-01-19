@@ -20,6 +20,11 @@ players.BasicPlayer = function(url,id){
 	this._sound.addEventListener('play', function() { 
 		self.callback.onPlay(self._id);
 	}, false);
+
+	this._sound.addEventListener('paus', function() { 
+		self.callback.onPaus(self._id);
+	}, false);
+
 	this._sound.onerror = function(){
 		self.callback.onError(self._id);
 	}
@@ -44,5 +49,7 @@ players.BasicPlayer.prototype.seek = function(){
 };
 
 players.BasicPlayer.prototype.dispose = function(){
+	this._sound.pause();
+	this._sound = null;
 };
 

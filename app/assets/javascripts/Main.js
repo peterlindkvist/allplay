@@ -38,7 +38,8 @@ Main.prototype.setupEvents = function() {
     })
     .on("click", ".js-next_button", function(e) {
       e.preventDefault();
-      self.loadNext();
+      self._index++
+	  self.loadNext();
     })
 	.on("click", ".js-play_item_button", function(e) {
 		self._index = $(this).data('id');
