@@ -1,9 +1,9 @@
 {
   "name": "Test Playlist",
   "songs": [
-      {
-        "url" : "http://www.youtube.com/watch?v=m3KdpzL3Hkk",
-        "title" : "youtube",
+    {
+        "url" : "Ajajaj.wav",
+        "title" : "Ajaj",
         "duration": 3600,
         "position": 0
     },

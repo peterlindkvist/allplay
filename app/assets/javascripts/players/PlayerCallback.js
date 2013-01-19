@@ -13,3 +13,4 @@ players.PlayerCallback.prototype.onPosition = function(){};
 players.PlayerCallback.prototype.onPlay = function() {};
 
 players.PlayerCallback.prototype.onPause = function() {};
+

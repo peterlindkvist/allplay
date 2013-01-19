@@ -1,9 +1,9 @@
 window.players = window.players || {};
 
 
-players.BasicPlayer = function(url){
+players.BasicPlayer = function(url,id){
 	var self=this;
-	
+	this._id = id;
 	this.callback = new players.PlayerCallback();
 	//on the api playback event call this.callback.onEnd() ...
 	
