@@ -102,6 +102,7 @@ players.SoundCloudPlayer.prototype.seek = function(pos) {
 
 players.SoundCloudPlayer.prototype.dispose = function() {
 	console.log("SCPlayer dispose");
+  this.stop();
   this._soundObj = null;
 };
 
