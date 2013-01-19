@@ -24,7 +24,7 @@ players.SoundCloudPlayer.prototype.setupSDK = function(callback) {
 
   if (document.querySelector("[src='"+Settings.soundcloud.sdk_uri+"']")) {
     console.info("SoundCloud SDK already initialized");
-    players.SoundCloudPlayer.onSDKLoad(callback);
+    this.onSDKLoad(callback);
     return;
   }
 
@@ -66,6 +66,7 @@ players.SoundCloudPlayer.prototype.prepareForPlayback = function(callback) {
     SC.stream("/tracks/"+this._soundObj.track.id, function(loadedSound) {
       console.log("SCPlayer - loaded sound data: ", loadedSound);
       self._soundObj.loadedSound = loadedSound;
+      window.loadedSound = loadedSound;
       self.prepareForPlayback(callback);
     });
     return false;
@@ -113,6 +114,9 @@ players.SoundCloudPlayer.prototype.stop = function() {
 
 players.SoundCloudPlayer.prototype.seek = function(pos) {
   console.log("SCPlayer seek", pos);
+
+  if (!this._soundObj.loadedSound) return;
+  this._soundObj.loadedSound.setPosition(pos);
 };
 
 players.SoundCloudPlayer.prototype.dispose = function() {
@@ -123,6 +127,19 @@ players.SoundCloudPlayer.prototype.dispose = function() {
 
 players.SoundCloudPlayer.prototype.onReady = function() {
   if (this.callback.onReady) this.callback.onReady(this);
+};
+
+players.SoundCloudPlayer.prototype.getDuration = function() {
+  if (!this._soundObj.loadedSound) return 0;
+
+  if (this._soundObj.loadedSound.loaded)
+    return this._soundObj.loadedSound.duration;
+  return this._soundObj.loadedSound.durationEstimate;
+};
+
+players.SoundCloudPlayer.prototype.getPosition = function() {
+  if (!this._soundObj.position) return 0;
+  return this._soundObj.loadedSound.position;
 };
 
 /**
