@@ -83,7 +83,9 @@ players.SoundCloudPlayer.prototype.play = function() {
 
   if (this._soundObj.loadedSound.playState === 1 && !this._soundObj.loadedSound.paused) return;  // don't play more than one sound at a time
   this._soundObj.loadedSound.play({
-    onfinish: self.onEnd
+    onfinish: function() {
+      self.onEnd();
+    }
   });
 
   if (this.callback.onPlay) this.callback.onPlay();
@@ -116,11 +118,14 @@ players.SoundCloudPlayer.prototype.stop = function() {
   this._soundObj.loadedSound.stop();
 };
 
+/**
+ * @param integer pos Position in seconds
+ */
 players.SoundCloudPlayer.prototype.seek = function(pos) {
   console.log("SCPlayer seek", pos);
 
   if (!this._soundObj.loadedSound) return;
-  this._soundObj.loadedSound.setPosition(pos);
+  this._soundObj.loadedSound.setPosition(pos * 1000);
 };
 
 players.SoundCloudPlayer.prototype.dispose = function() {
@@ -138,6 +143,9 @@ players.SoundCloudPlayer.prototype.onEnd = function() {
   if (this.callback.onEnd) this.callback.onEnd();
 };
 
+/**
+ * @return integer Duration in seconds
+ */
 players.SoundCloudPlayer.prototype.getDuration = function() {
   var duration = 0;
   if (!this._soundObj.loadedSound) return duration;
@@ -149,6 +157,9 @@ players.SoundCloudPlayer.prototype.getDuration = function() {
   return duration / 1000;
 };
 
+/**
+ * @return integer Position in seconds
+ */
 players.SoundCloudPlayer.prototype.getPosition = function() {
   var position = 0;
   if (!this._soundObj.loadedSound.position) return position;
