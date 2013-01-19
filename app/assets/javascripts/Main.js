@@ -14,7 +14,7 @@ Main.prototype.start = function(playlist){
   this._playlist = playlist;
   this._index = 0;
 
-  $(".js-list").html(HandlebarsTemplates['list'](playlist));
+  $(".js-list").html(HandlebarsTemplates.list(playlist));
 
   this.setupEvents();
   this.loadNext();
@@ -159,10 +159,19 @@ Main.prototype.stop = function() {
 };
 
 Main.prototype.addSong = function(url){
-  console.log("ADD song not implemented", url);
+  PlayerFactory.getMetaData(url, function(data){
+    $.extend(data, { url: url });
+
+    console.log("add", data);
+
+    $(".js-list ul").append(Handlebars.partials._song(data));
+    // TODO: Save to db
+  });
 };
 
 Main.prototype.setCurrentPosition = function() {
+  if (!("getPosition" in this._currentPlayer)) return;
+
   var position = this._currentPlayer.getPosition();
   //console.log("setCurrentPosition: ", position);
 
@@ -170,6 +179,8 @@ Main.prototype.setCurrentPosition = function() {
 };
 
 Main.prototype.setCurrentDuration = function() {
+  if (!("getDuration" in this._currentPlayer)) return;
+
   var duration = this._currentPlayer.getDuration();
   //console.log("setCurrentDuration: ", position);
 
