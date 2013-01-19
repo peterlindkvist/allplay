@@ -39,11 +39,19 @@ Main.prototype.setupEvents = function() {
     .on("click", ".js-next_button", function(e) {
       e.preventDefault();
       self.loadNext();
-    });
+    })
+	.on("click", ".js-play_item_button", function(e) {
+		self._index = $(this).data('id');
+		self.loadNext();
+	});
 };
 
 Main.prototype.loadNext = function() {
 	var self = this;
+
+	if(this._currentPlayer){
+		this._currentPlayer.dispose();
+	}
 
 	var url = this._playlist.songs[this._index].url;
 	this._currentPlayer = PlayerFactory.resolve(url, this.index);
