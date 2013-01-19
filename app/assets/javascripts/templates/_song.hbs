@@ -1,8 +1,13 @@
-<li class="list_item block js-list-item-{{id}}" data-id="{{id}}">
-  <strong class="block">{{title}}</strong>
-  <span class="units u3">
-    <span class="js-position unit">{{position}}</span>
-    <span class="js-duration unit align_right">{{duration}}</span>
-    <a href="#" class="unit align_right js-play_item_button" data-id="{{id}}">▶</a>
-  </span>
+<li class="js-list-item-{{id}} block list_item padding_1" data-id="{{id}}">
+  <strong class="block fs18 lh1_5">{{title}}</strong>
+  <div class="units u10">
+    <div class="unit span_9">
+      <span class="js-position">{{position}}</span> /
+      <span class="js-duration align_right">{{duration}}</span>
+    </div>
+    <div class="unit">
+      <!--<a href="#" class="js-play_item_button play_item_button unit
+        align_right border_0" data-id="{{id}}">Play</a>-->
+    </div>
+  </div>
 </li>
