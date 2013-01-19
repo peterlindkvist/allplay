@@ -3,7 +3,7 @@ TestPage
 <script>
 $().ready(function(){
 	
-	player = new players.BasicPlayer('Ajajaj.wav');
+	player = PlayerFactory.resolve('Ajajaj.wav');
 	player.callback.onReady  =  function(){
 	  console.log('###');
 	  player.play()
