@@ -1,7 +1,7 @@
 window.players = players || {};
 
 players.IPlayer = function(){
-	this.callback = new players.Callback();
+	this.callback = new players.PlayerCallback();
 	//on the api playback event call this.callback.onEnd() ...
 };
 
