@@ -53,3 +53,5 @@ production:
   pool: 5
   username: allplay
   password: master
+  host: localhost
+  port: 5432
