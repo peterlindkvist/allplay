@@ -21,8 +21,7 @@ players.IPlayer.prototype.dispose = function(){
 	console.log("IPLAYER dispose")
 };
 
-players.IPlayer.isSupported = function(url){
+players.IPlayer.supportsURL = function(url){
 	return false;
 };
-
 
