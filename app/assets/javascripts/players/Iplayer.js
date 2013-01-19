@@ -1,4 +1,4 @@
-window.players = players || {};
+ var players = window.players || {};
 
 players.IPlayer = function(){
 	this.callback = new players.PlayerCallback();
