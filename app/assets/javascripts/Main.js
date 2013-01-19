@@ -8,6 +8,9 @@ Main = function(){
 
 
 Main.prototype.start = function(playlist){
+	for(var i = 0; i< playlist.songs.length;i++){
+		playlist.songs[i].id = i;
+	}
 	this._playlist = playlist;
 	this._index = 0;
 
@@ -43,22 +46,22 @@ Main.prototype.loadNext = function() {
 	var self = this;
 
 	var url = this._playlist.songs[this._index].url;
-	this._currentPlayer = PlayerFactory.resolve(url);
-	this._currentPlayer.callback.onReady = function(){
+	this._currentPlayer = PlayerFactory.resolve(url, this.index);
+	this._currentPlayer.callback.onReady = function(id){
 		self.play();
 	};
 
-  this._currentPlayer.callback.onPlay = function() {
+  this._currentPlayer.callback.onPlay = function(id) {
     console.log("onPlay - args: ", arguments);
     // set UI state
   };
 
-  this._currentPlayer.callback.onPause = function() {
+  this._currentPlayer.callback.onPause = function(id) {
     console.log("onPause - args: ", arguments);
     // set UI state
   };
 
-	this._currentPlayer.callback.onEnd = function() {
+	this._currentPlayer.callback.onEnd = function(id) {
 		console.log("onEnd");
 		self._index ++;
 		self.loadNext();
