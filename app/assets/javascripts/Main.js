@@ -71,6 +71,8 @@ Main.prototype.setupEvents = function() {
 };
 
 Main.prototype.loadNext = function() {
+  if (this._playlist.songs.length === 0) return;
+
   var self = this;
 
   if (this._index === this._playlist.songs.length)
