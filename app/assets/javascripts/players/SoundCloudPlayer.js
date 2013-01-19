@@ -64,17 +64,14 @@ players.SoundCloudPlayer.prototype.prepareForPlayback = function(callback) {
 
   if (!this._soundObj.loadedSound) {
     SC.stream("/tracks/"+this._soundObj.track.id, function(loadedSound) {
-      console.log("loaded sound data: ", loadedSound);
+      console.log("SCPlayer - loaded sound data: ", loadedSound);
       self._soundObj.loadedSound = loadedSound;
       self.prepareForPlayback(callback);
     });
     return false;
   }
 
-  if (callback) {
-    console.log("calling CALLBACK");
-    callback();
-  }
+  if (callback) callback();
   return true;
 };
 
