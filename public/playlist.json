@@ -1,0 +1,6 @@
+{
+    name : 'test',
+    songs : [
+            'http://open.spotify.com/track/5E8pXD9M4k3IcCr9GtJnIj'
+    ]
+}
