@@ -21,8 +21,9 @@ players.BasicPlayer = function(url,id){
 		self.callback.onPlay(self._id);
 	}, false);
 
-	this._sound.addEventListener('paus', function() { 
-		self.callback.onPaus(self._id);
+	this._sound.addEventListener('pause', function() { 
+		console.log('Basicplayer Pause');
+		self.callback.onPause(self._id);
 	}, false);
 
 	this._sound.onerror = function(){
