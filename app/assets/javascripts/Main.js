@@ -60,20 +60,21 @@ Main.prototype.loadNext = function() {
     self._index = 0;  // reached end, go to beginning
 
   if(this._currentPlayer){
-    $('.js-list-item-'+this._index).removeClass('pausing').removeClass('playing');
+	$('.js-list-item-'+this._index).removeClass('pausing').removeClass('playing');
     this._currentPlayer.dispose();
   }
 
   var url = this._playlist.songs[this._index].url;
   this._currentPlayer = PlayerFactory.resolve(url, this._index);
+  
   this._currentPlayer.callback.onReady = function(id){
     self.play();
-    $('.js-list-item-'+self._index).addClass('playing').removeClass('pausing');
+    console.log('ONREADY' , self._index);
+	$('.js-list-item-'+self._index).addClass('playing').removeClass('pausing');
   };
 
   this._currentPlayer.callback.onPlay = function(id) {
-    console.log("onPlay - args: ", arguments);
-  $('.js-list-item-'+id).addClass('playing').removeClass('pausing');
+  $('.js-list-item-'+self._index).addClass('playing').removeClass('pausing');
     // set UI state
   };
 
@@ -81,16 +82,14 @@ Main.prototype.loadNext = function() {
     console.log("onPause - args: ", arguments);
 
     // set UI state
-    $('.js-list-item-'+id).addClass('pausing').removeClass('playing');
+    $('.js-list-item-'+self._index).addClass('pausing').removeClass('playing');
   };
 
   this._currentPlayer.callback.onEnd = function(id) {
     console.log("onEnd");
+    $('.js-list-item-'+self._index).removeClass('pausing').removeClass('playing');
     self._index ++;
     self.loadNext();
-
-    // set UI state
-    $('.js-list-item-'+id).removeClass('pausing').removeClass('playing');
   };
 };
 
