@@ -1,10 +1,9 @@
- var players = window.players || {};
+var players = window.players || {};
 
 players.IPlayer = function(){
 	this.callback = new players.PlayerCallback();
 	//on the api playback event call this.callback.onEnd() ...
 };
-
 
 players.IPlayer.prototype.play = function(){
 	console.log("IPLAYER play")
