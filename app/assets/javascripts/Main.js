@@ -40,33 +40,33 @@ Main.prototype.setupEvents = function() {
       e.preventDefault();
       self.loadNext();
     })
-	.on("click", ".js-play_item_button", function(e) {
-		self._index = $(this).data('id');
-		self.loadNext();
-	}).on("click", ".js-add-song", function(e) {
-		  var $input = $('#' + $(this).data('input'));
-		  var url = $input.val();
-		  self.addSong($input.val());
-	  });
+  .on("click", ".js-play_item_button", function(e) {
+    self._index = $(this).data('id');
+    self.loadNext();
+  }).on("click", ".js-add-song", function(e) {
+    var $input = $('#' + $(this).data('input'));
+    var url = $input.val();
+    self.addSong($input.val());
+  });
 };
 
 Main.prototype.loadNext = function() {
-	var self = this;
+  var self = this;
 
-	if(this._currentPlayer){
-		this._currentPlayer.dispose();
-	}
+  if(this._currentPlayer){
+    this._currentPlayer.dispose();
+  }
 
-	var url = this._playlist.songs[this._index].url;
-	console.log("init", this._index)
-	this._currentPlayer = PlayerFactory.resolve(url, this._index);
-	this._currentPlayer.callback.onReady = function(id){
-		self.play();
-	};
+  var url = this._playlist.songs[this._index].url;
+  console.log("init", this._index);
+  this._currentPlayer = PlayerFactory.resolve(url, this._index);
+  this._currentPlayer.callback.onReady = function(id){
+    self.play();
+  };
 
   this._currentPlayer.callback.onPlay = function(id) {
     console.log("onPlay - args: ", arguments);
-	$('.js-list-item-'+id).addClass('playing').removeClass('pausing');
+  $('.js-list-item-'+id).addClass('playing').removeClass('pausing');
     // set UI state
   };
 
@@ -76,18 +76,18 @@ Main.prototype.loadNext = function() {
     // set UI state
   };
 
-	this._currentPlayer.callback.onEnd = function(id) {
-		console.log("onEnd");
-		self._index ++;
-		self.loadNext();
-		$('.js-list-item-'+id).removeClass('pausing').removeClass('playing');
-		// set UI state
-	};
+  this._currentPlayer.callback.onEnd = function(id) {
+    console.log("onEnd");
+    self._index ++;
+    self.loadNext();
+    $('.js-list-item-'+id).removeClass('pausing').removeClass('playing');
+    // set UI state
+  };
 };
 
 Main.prototype.play = function(){
   if (!this._currentPlayer) return;
-	if ("play" in this._currentPlayer) this._currentPlayer.play();
+  if ("play" in this._currentPlayer) this._currentPlayer.play();
 };
 
 Main.prototype.pause = function() {
@@ -97,7 +97,7 @@ Main.prototype.pause = function() {
 
 Main.prototype.stop = function() {
   if (!this._currentPlayer) return;
-	if ("stop" in this._currentPlayer) this._currentPlayer.stop();
+  if ("stop" in this._currentPlayer) this._currentPlayer.stop();
 };
 
 Main.prototype.addSong = function(url){
