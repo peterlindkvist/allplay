@@ -331,6 +331,42 @@ input[type="number"]::-webkit-inner-spin-button {
 .width_95  { width: 95%; }
 .width_100 { width: 100%; }
 
+.units,
+.units_gts,
+.units_gtm {
+  width: 100%;
+  font-size: 0px;
+ /* -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;*/
+}
+.unit {
+ /* -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;*/
+  display: inline-block;
+  font-size: 12px;
+  vertical-align: top;
+  width:100%;
+}
+.lt-ie8 .unit {
+  zoom: 1;
+  display: inline;
+  margin: 0;
+}
+
+@for $i from 2 through 10 {
+	.units.u#{$i} {
+		>.unit {
+			width:(99.99%/$i);
+		}
+		@for $j from 1 through $i {
+			.span_#{$j} { width:(99.99%/$i*$j); }
+			.shift_#{$j} { margin-left:(99.99%/$i*$j); }
+		}
+	}
+}
+
 .list_item {
   &:nth-child(2n) {
     background: #ccc;
