@@ -4,26 +4,26 @@
     {
         "url" : "https://soundcloud.com/fatpossum/dropla",
         "title" : "SoundCloud Clip",
-        "duration": "Unknown",
-        "position": 0
+        "duration": "00:00",
+        "position": "00:00"
     },
     {
         "url" : "Drommar.wav",
         "title" : "Ajaj",
-        "duration": "Unknown",
-        "position": 0
+        "duration": "00:00",
+        "position": "00:00"
     },
     {
         "url" : "http://www.youtube.com/watch?v=m3KdpzL3Hkk",
         "title" : "youtube",
-        "duration": "Unknown",
-        "position": 0
+        "duration": "00:00",
+        "position": "00:00"
     },
     {
         "url" : "http://www.youtube.com/watch?v=6HA2D3LsJQs",
         "title" : "youtube",
-        "duration": "Unknown",
-        "position": 0
+        "duration": "00:00",
+        "position": "00:00"
     }
   ]
 }

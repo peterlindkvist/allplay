@@ -66,6 +66,7 @@ players.SoundCloudPlayer.prototype.prepareForPlayback = function(callback) {
     SC.stream("/tracks/"+this._soundObj.track.id, function(loadedSound) {
       console.log("SCPlayer - loaded sound data: ", loadedSound);
       self._soundObj.loadedSound = loadedSound;
+      window.loadedSound = loadedSound;
       self.prepareForPlayback(callback);
     });
     return false;
@@ -129,16 +130,22 @@ players.SoundCloudPlayer.prototype.onReady = function() {
 };
 
 players.SoundCloudPlayer.prototype.getDuration = function() {
-  if (!this._soundObj.loadedSound) return 0;
+  var duration = 0;
+  if (!this._soundObj.loadedSound) return duration;
 
   if (this._soundObj.loadedSound.loaded)
-    return this._soundObj.loadedSound.duration;
-  return this._soundObj.loadedSound.durationEstimate;
+    duration = this._soundObj.loadedSound.duration;
+  duration = this._soundObj.loadedSound.durationEstimate;
+
+  return duration / 1000;
 };
 
 players.SoundCloudPlayer.prototype.getPosition = function() {
-  if (!this._soundObj.loadedSound.position) return 0;
-  return this._soundObj.loadedSound.position;
+  var position = 0;
+  if (!this._soundObj.loadedSound.position) return position;
+  position = this._soundObj.loadedSound.position;
+
+  return position / 1000;
 };
 
 /**
