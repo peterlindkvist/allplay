@@ -111,8 +111,18 @@ Main.prototype.loadNext = function() {
 };
 
 Main.prototype.play = function(){
+  var self = this;
+
   if (!this._currentPlayer) return;
   if ("play" in this._currentPlayer) this._currentPlayer.play();
+
+  if (this._setPositionInterval) {
+    clearInterval(this._setPositionInterval);
+    this._setPositionInterval = null;
+  }
+  this._setPositionInterval = setInterval(function() {
+    self.setCurrentPosition();
+  }, 500);
 };
 
 Main.prototype.pause = function() {
@@ -132,4 +142,9 @@ Main.prototype.stop = function() {
 
 Main.prototype.addSong = function(url){
   console.log("ADD song not implemented", url);
+};
+
+Main.prototype.setCurrentPosition = function() {
+  var position = this._currentPlayer.getPosition();
+  console.log("setCurrentPosition: ", position);
 };
