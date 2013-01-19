@@ -1,6 +1,7 @@
 var players = window.players || {};
 
 players.YoutubePlayer = function(url,id){
+	console.log('Youtube', id);
 	this._id = id;
 	var self = this;
 	var _domid = "js-player-inner";
@@ -37,13 +38,13 @@ players.YoutubePlayer.prototype._onStateCallback = function(state){
 	console.log("state",state)
 	switch(state){
 		case 0:
-			this.callback.onEnd(this);
+			this.callback.onEnd(this._id);
 			break;
 		case 1:
-			this.callback.onPlay(this);
+			this.callback.onPlay(this._id);
 			break;
 		case 2:
-			this.callback.onPaus(this);
+			this.callback.onPause(this._id);
 			break;
 	}
 };

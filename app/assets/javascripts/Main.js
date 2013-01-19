@@ -1,24 +1,24 @@
 Main = function(){
-	var self = this;
+  var self = this;
 
-	$.getJSON('/playlist.json', function(data){
-		self.start(data);
-	});
+  $.getJSON('/playlist.json', function(data){
+    self.start(data);
+  });
 };
 
 
 Main.prototype.start = function(playlist){
-	for(var i = 0; i< playlist.songs.length;i++){
-		playlist.songs[i].id = i;
-	}
-	this._playlist = playlist;
-	this._index = 0;
+  for(var i = 0; i< playlist.songs.length;i++){
+    playlist.songs[i].id = i;
+  }
+  this._playlist = playlist;
+  this._index = 0;
 
   //this.setupAPICommunication();
-	$(".js-list").html(HandlebarsTemplates['list'](playlist));
+  $(".js-list").html(HandlebarsTemplates['list'](playlist));
 
   this.setupEvents();
-	this.loadNext();
+  this.loadNext();
 };
 
 Main.prototype.setupAPICommunication = function() {
@@ -46,47 +46,62 @@ Main.prototype.setupEvents = function() {
     .on("click", ".js-next_button", function(e) {
       e.preventDefault();
       self.loadNext();
+    })
+    .on("click", ".js-play_item_button", function(e) {
+      self._index = $(this).data('id');
+      self.loadNext();
     });
 };
 
 Main.prototype.loadNext = function() {
-	var self = this;
+  var self = this;
 
-	var url = this._playlist.songs[this._index].url;
-	this._currentPlayer = PlayerFactory.resolve(url, this.index);
-	this._currentPlayer.callback.onReady = function(id){
-		self.play();
-	};
+  if(this._currentPlayer){
+    this._currentPlayer.dispose();
+  }
+
+  var url = this._playlist.songs[this._index].url;
+  console.log("init", this._index);
+  this._currentPlayer = PlayerFactory.resolve(url, this._index);
+  this._currentPlayer.callback.onReady = function(id){
+    self.play();
+  };
 
   this._currentPlayer.callback.onPlay = function(id) {
     console.log("onPlay - args: ", arguments);
+
     // set UI state
+    $('.js-list-item-'+id).addClass('playing').removeClass('pausing');
   };
 
   this._currentPlayer.callback.onPause = function(id) {
     console.log("onPause - args: ", arguments);
+
     // set UI state
+    $('.js-list-item-'+id).addClass('pausing').removeClass('playing');
   };
 
-	this._currentPlayer.callback.onEnd = function(id) {
-		console.log("onEnd");
-		self._index ++;
-		self.loadNext();
-		// set UI state
-	};
+  this._currentPlayer.callback.onEnd = function(id) {
+    console.log("onEnd");
+    self._index++;
+    self.loadNext();
+
+    // set UI state
+    $('.js-list-item-'+id).removeClass('pausing').removeClass('playing');
+  };
 };
 
 Main.prototype.play = function(){
   if (!this._currentPlayer) return;
-	if ("play" in this._currentPlayer) this._currentPlayer.play();
+  if ("play" in this._currentPlayer) this._currentPlayer.play();
 };
 
 Main.prototype.pause = function() {
   if (!this._currentPlayer) return;
-	if ("pause" in this._currentPlayer) this._currentPlayer.pause();
+  if ("pause" in this._currentPlayer) this._currentPlayer.pause();
 };
 
 Main.prototype.stop = function() {
   if (!this._currentPlayer) return;
-	if ("stop" in this._currentPlayer) this._currentPlayer.stop();
+  if ("stop" in this._currentPlayer) this._currentPlayer.stop();
 };
