@@ -1,12 +1,23 @@
 {
-    "name": "tes",
-    "songs": [
-        {
-            "url" : "http://open.spotify.com/track/5E8pXD9M4k3IcCr9GtJnIj",
-            "title" : "foo"
-        },{
-            "url" : "http://open.spotify.com/track/5E8pXD9M4k3IcCr9GtJnIj",
-            "title" : "foo"
-        }
-    ]
+  "name": "Test Playlist",
+  "songs": [
+      {
+        "url" : "http://www.youtube.com/watch?v=m3KdpzL3Hkk",
+        "title" : "youtube",
+        "duration": 3600,
+        "position": 0
+    },
+    {
+      "url" : "http://open.spotify.com/track/5E8pXD9M4k3IcCr9GtJnIj",
+      "title" : "foo",
+      "duration": 3600,
+      "position": 0
+    },
+    {
+      "url" : "http://open.spotify.com/track/5E8pXD9M4k3IcCr9GtJnIj",
+      "title" : "foo",
+      "duration": 3600,
+      "position": 0
+    }
+  ]
 }

@@ -41,12 +41,22 @@ Main.prototype.setupEvents = function() {
 
 Main.prototype.loadNext = function() {
 	var self = this;
-	var url = this._playlist[this._index];
-	/*this._currentPlayer = PlayerFactory.resolve(url);
 
+	var url = this._playlist.songs[this._index].url;
+	this._currentPlayer = PlayerFactory.resolve(url);
 	this._currentPlayer.callback.onReady = function(){
 		self.startPlaying();
-	} */
+	} 
+
+  this._currentPlayer.callback.onPlay = function() {
+    console.log("onPlay - args: ", arguments);
+    // set UI state
+  };
+
+  this._currentPlayer.callback.onPause = function() {
+    console.log("onPause - args: ", arguments);
+    // set UI state
+  };
 };
 
 Main.prototype.play = function(){
