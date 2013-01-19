@@ -1,3 +1,10 @@
+== Install Postgres
+CREATE USER allplay WITH PASSWORD 'master';
+CREATE DATABASE allplay_development;
+CREATE DATABASE allplay_production;
+GRANT ALL PRIVILEGES ON DATABASE allplay_development to allplay;
+GRANT ALL PRIVILEGES ON DATABASE allplay_production to allplay;
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
