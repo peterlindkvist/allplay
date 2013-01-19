@@ -157,7 +157,7 @@ players.SoundCloudPlayer.prototype.getDuration = function() {
   var duration = 0;
   if (!this._soundObj.loadedSound) return duration;
 
-  if (this._soundObj.loadedSound.loaded)
+  if (this._soundObj.loadedSound && this._soundObj.loadedSound.loaded)
     duration = this._soundObj.loadedSound.duration;
   duration = this._soundObj.loadedSound.durationEstimate;
 
@@ -169,7 +169,7 @@ players.SoundCloudPlayer.prototype.getDuration = function() {
  */
 players.SoundCloudPlayer.prototype.getPosition = function() {
   var position = 0;
-  if (!this._soundObj.loadedSound.position) return position;
+  if (!this._soundObj.loadedSound && this._soundObj.loadedSound.loaded) return position;
   position = this._soundObj.loadedSound.position;
 
   return position / 1000;
