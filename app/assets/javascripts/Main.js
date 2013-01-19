@@ -163,6 +163,8 @@ Main.prototype.addSong = function(url){
 };
 
 Main.prototype.setCurrentPosition = function() {
+  if (!("getPosition" in this._currentPlayer)) return;
+
   var position = this._currentPlayer.getPosition();
   //console.log("setCurrentPosition: ", position);
 
@@ -170,6 +172,8 @@ Main.prototype.setCurrentPosition = function() {
 };
 
 Main.prototype.setCurrentDuration = function() {
+  if (!("getDuration" in this._currentPlayer)) return;
+
   var duration = this._currentPlayer.getDuration();
   //console.log("setCurrentDuration: ", position);
 
