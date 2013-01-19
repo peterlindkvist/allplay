@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require handlebars.runtime
+//= require libs/swfobject.js
 //= require_tree .
 
 $().ready(function(){
