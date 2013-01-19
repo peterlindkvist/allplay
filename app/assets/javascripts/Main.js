@@ -14,10 +14,17 @@ Main.prototype.start = function(playlist){
 	this._playlist = playlist;
 	this._index = 0;
 
+  //this.setupAPICommunication();
 	$(".js-list").html(HandlebarsTemplates['list'](playlist));
 
   this.setupEvents();
 	this.loadNext();
+};
+
+Main.prototype.setupAPICommunication = function() {
+  //if ("soundcloud" in Settings) {
+    //players.SoundCloudPlayer.setupSDK();
+  //}
 };
 
 Main.prototype.setupEvents = function() {
