@@ -71,7 +71,7 @@ players.YoutubePlayer.prototype.dispose = function(){
   this._player.clearVideo();
   window.onYouTubePlayerReady = null;
   window.onYouTubePlayerStateCallback = null;
-  $('js-player').html();
+  $('#js-player').empty();
 };
 
 /**
