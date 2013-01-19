@@ -38,6 +38,7 @@ Main.prototype.setupEvents = function() {
     })
     .on("click", ".js-next_button", function(e) {
       e.preventDefault();
+	  $('.js-list-item-'+self._index).removeClass('pausing').removeClass('playing');
       self._index++;
       self.loadNext();
     })
@@ -70,6 +71,7 @@ Main.prototype.loadNext = function() {
 
   if (this._index === this._playlist.songs.length)
     this._index = 0;  // reached end, go to beginning
+	
 
   if (this._index < 0) {
     this._index = this._playlist.songs.length - 1;  // attempting to play song before first one, move to last one
@@ -77,7 +79,6 @@ Main.prototype.loadNext = function() {
   }
 
   if(this._currentPlayer){
-	$('.js-list-item-'+this._index).removeClass('pausing').removeClass('playing');
     this._currentPlayer.dispose();
   }
 
@@ -86,7 +87,6 @@ Main.prototype.loadNext = function() {
   
   this._currentPlayer.callback.onReady = function(id){
     self.play();
-    console.log('ONREADY' , self._index);
 	$('.js-list-item-'+self._index).addClass('playing').removeClass('pausing');
   };
 
@@ -96,7 +96,6 @@ Main.prototype.loadNext = function() {
   };
 
   this._currentPlayer.callback.onPause = function(id) {
-    console.log("onPause - args: ", arguments);
 
     // set UI state
     $('.js-list-item-'+self._index).addClass('pausing').removeClass('playing');
