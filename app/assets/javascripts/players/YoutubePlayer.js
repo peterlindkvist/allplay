@@ -67,10 +67,7 @@ players.YoutubePlayer.prototype.dispose = function(){
 	$('js-player').html();
 };
 
-players.YoutubePlayer.isSupported = function(url){
+players.YoutubePlayer.supportsURL = function(url){
 	return url.indexOf("www.youtube.com") != -1;
 };
-
-
-
 
