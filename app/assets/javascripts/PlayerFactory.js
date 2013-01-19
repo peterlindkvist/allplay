@@ -13,7 +13,7 @@ PlayerFactory.resolve = function(url){
     return new players.BasicPlayer(url);
 
   return new players.IPlayer(url);
-}
+};
 
 PlayerFactory.getMetaData = function(url, callback){
   if (players.YoutubePlayer.supportsURL(url))
@@ -27,5 +27,5 @@ PlayerFactory.getMetaData = function(url, callback){
 
 
   return new players.IPlayer.getMetaData(url, callback);
-}
+};
 
