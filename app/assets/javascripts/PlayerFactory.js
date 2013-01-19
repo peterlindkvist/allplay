@@ -8,6 +8,8 @@ PlayerFactory.resolve = function(url){
     console.log("SCPlayer supports URL");
     return new players.SoundCloudPlayer(url);
   }
+  if (players.Buzz.supportsURL(url))
+    return new players.Buzz(url);
 
   if (players.BasicPlayer.supportsURL(url))
     return new players.BasicPlayer(url);

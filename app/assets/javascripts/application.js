@@ -11,10 +11,11 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require handlebars.runtime.js
 //= require_tree ./templates
 //= require_tree ./libs
 //= require_tree .
 
 $().ready(function(){
-	var main = new Main();
+	main = new Main();
 })
