@@ -14,11 +14,14 @@ players.BasicPlayer = function(url,id){
 	}, false);
 	
 	this._sound.addEventListener('ended', function() { 
-		self.callback.onEnd();
+		self.callback.onEnd(self._id);
 	}, false);
 
+	this._sound.addEventListener('play', function() { 
+		self.callback.onPlay(self._id);
+	}, false);
 	this._sound.onerror = function(){
-		self.callback.onError();
+		self.callback.onError(self._id);
 	}
 	
 	this._sound.src=url;
