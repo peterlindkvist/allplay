@@ -1,8 +1,6 @@
-if Rails.env.production?
-  require 'fileutils'
-  FileUtils.mkdir_p(Rails.root.join("tmp", "stylesheets"))
 
-  Rails.configuration.middleware.insert_before('Rack::Sendfile', 'Rack::Static',
-                                               :urls => ['/stylesheets'],
-                                               :root => "#{Rails.root}/tmp")
+if Rails.configuration.respond_to?(:sass)
+  Rails.configuration.sass.tap do |config|
+    config.load_paths << "#{Gem.loaded_specs['compass'].full_gem_path}/frameworks/compass/stylesheets"
+  end
 end
