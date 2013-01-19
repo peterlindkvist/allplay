@@ -161,6 +161,9 @@ Main.prototype.stop = function() {
 Main.prototype.addSong = function(url){
   PlayerFactory.getMetadata(url, function(data){
     console.log("add", data);
+    $(".js-add-song-title").html(data.title);
+    $(".js-add-song-author").html(data.author);
+    $(".js-add-song-duration").html(data.duration);
   });
   //console.log("ADD song not implemented", url);
 };
