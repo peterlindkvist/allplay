@@ -43,7 +43,11 @@ Main.prototype.setupEvents = function() {
 	.on("click", ".js-play_item_button", function(e) {
 		self._index = $(this).data('id');
 		self.loadNext();
-	});
+	}).on("click", ".js-add-song", function(e) {
+		  var $input = $('#' + $(this).data('input'));
+		  var url = $input.val();
+		  self.addSong($input.val());
+	  });
 };
 
 Main.prototype.loadNext = function() {
@@ -94,4 +98,8 @@ Main.prototype.pause = function() {
 Main.prototype.stop = function() {
   if (!this._currentPlayer) return;
 	if ("stop" in this._currentPlayer) this._currentPlayer.stop();
+};
+
+Main.prototype.addSong = function(url){
+  console.log("ADD song not implemented", url)
 };

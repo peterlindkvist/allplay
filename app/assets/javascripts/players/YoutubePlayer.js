@@ -35,7 +35,6 @@ players.YoutubePlayer.prototype._onReady = function(player){
 };
 
 players.YoutubePlayer.prototype._onStateCallback = function(state){
-	console.log("state",state)
 	switch(state){
 		case 0:
 			this.callback.onEnd(this._id);
