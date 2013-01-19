@@ -7,6 +7,7 @@ $almost_white: rgb(226, 226, 226);
 $blue: #00f;
 $green: #0f0;
 $red: #f00;
+$yellow: transparentize(#ff0, 0.8);
 
 $max_width: 600px;
 
@@ -203,8 +204,10 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .bg_black { background-color:$black; }
 .bg_almost_white { background-color:$almost_white; }
+.bg_white { background-color: $white }
 .bg_white_opaque { background-color:transparentize($white, 0.6); }
 .bg_green { background-color: $green }
+.bg_yellow { background-color: $yellow }
 
 .opacity_0 { @include opacity(0); }
 .opacity_02 { @include opacity(0.2); }
@@ -375,7 +378,7 @@ input[type="number"]::-webkit-inner-spin-button {
     background: $almost_white;
   }
   &.playing {
-    background: transparentize(#ff0, 0.8);
+    background: $yellow;
   }
   &.pausing {
     -webkit-animation: paused 500ms infinite;
@@ -392,25 +395,25 @@ input[type="number"]::-webkit-inner-spin-button {
 
 @-webkit-keyframes paused {
   0% {
-    background: transparentize(#ff0, 0.8);
+    background: $yellow;
   }
   50% {
     background: $white;
   }
   100% {
-    background: transparentize(#ff0, 0.8);
+    background: $yellow;
   }
 }
 
 @-moz-keyframes playing {
   0% {
-    background: transparentize(#ff0, 0.8);
+    background: $yellow;
   }
   50% {
     background: $white;
   }
   100% {
-    background: transparentize(#ff0, 0.8);
+    background: $yellow;
   }
 }
 
