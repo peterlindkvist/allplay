@@ -2,18 +2,29 @@
   "name": "Test Playlist",
   "songs": [
     {
-        "url" : "Drommar.wav",
-        "title" : "Drommar",
+        "url" : "https://soundcloud.com/fatpossum/dropla",
+        "title" : "SoundCloud Clip",
         "duration": 3600,
         "position": 0
     },
-      {
-          "url" : "http://www.youtube.com/watch?v=6HA2D3LsJQs",
-          "title" : "youtube",
-          "duration": 3600,
-          "position": 0
-      },
-
+    {
+        "url" : "Ajajaj.wav",
+        "title" : "Ajaj",
+        "duration": 3600,
+        "position": 0
+    },
+    {
+        "url" : "http://www.youtube.com/watch?v=m3KdpzL3Hkk",
+        "title" : "youtube",
+        "duration": 3600,
+        "position": 0
+    },
+    {
+        "url" : "http://www.youtube.com/watch?v=6HA2D3LsJQs",
+        "title" : "youtube",
+        "duration": 3600,
+        "position": 0
+    },
     {
       "url" : "http://open.spotify.com/track/5E8pXD9M4k3IcCr9GtJnIj",
       "title" : "foo",
