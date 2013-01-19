@@ -11,7 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require handlebars.runtime.js
 //= require_tree ./templates
 //= require_tree ./libs
 //= require_tree .
