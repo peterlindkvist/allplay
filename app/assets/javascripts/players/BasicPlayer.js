@@ -1,20 +1,25 @@
 window.players = window.players || {};
 
 players.BasicPlayer = function(url){
-	self=this;
+	var self=this;
+	
 	this.callback = new players.PlayerCallback();
 	//on the api playback event call this.callback.onEnd() ...
+	
 	this._sound = new Audio();	
+	
 	this._sound.addEventListener('canplaythrough', function() { 
-		self.onReady();
+		self.callback.onReady();
 	}, false);
+	
 	this._sound.addEventListener('ended', function() { 
-		self.onEnd();
+		self.callback.onEnd();
 	}, false);
 
 	this._sound.onerror = function(){
-		this.callback.onError();
+		self.callback.onError();
 	}
+	
 	
 	this._sound.src=url;
 	
