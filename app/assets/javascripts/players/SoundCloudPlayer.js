@@ -79,8 +79,12 @@ players.SoundCloudPlayer.prototype.prepareForPlayback = function(callback) {
 players.SoundCloudPlayer.prototype.play = function() {
   console.log("SCPlayer play");
 
+  var self = this;
+
   if (this._soundObj.loadedSound.playState === 1 && !this._soundObj.loadedSound.paused) return;  // don't play more than one sound at a time
-  this._soundObj.loadedSound.play();
+  this._soundObj.loadedSound.play({
+    onfinish: self.onEnd
+  });
 
   if (this.callback.onPlay) this.callback.onPlay();
 };
@@ -122,11 +126,16 @@ players.SoundCloudPlayer.prototype.seek = function(pos) {
 players.SoundCloudPlayer.prototype.dispose = function() {
   console.log("SCPlayer dispose");
   this.stop();
+  this._soundObj.loadedSound.destruct();
   this._soundObj = null;
 };
 
 players.SoundCloudPlayer.prototype.onReady = function() {
   if (this.callback.onReady) this.callback.onReady(this);
+};
+
+players.SoundCloudPlayer.prototype.onEnd = function() {
+  if (this.callback.onEnd) this.callback.onEnd();
 };
 
 players.SoundCloudPlayer.prototype.getDuration = function() {
