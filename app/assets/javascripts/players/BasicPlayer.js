@@ -1,5 +1,6 @@
 window.players = window.players || {};
 
+
 players.BasicPlayer = function(url){
 	var self=this;
 	
