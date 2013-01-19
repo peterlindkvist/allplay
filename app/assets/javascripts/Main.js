@@ -47,7 +47,17 @@ Main.prototype.loadNext = function() {
 
 	this._currentPlayer.callback.ready = function(){
 		self.startPlaying();
-	}
+	} 
+
+  this._currentPlayer.callback.onPlay = function() {
+    console.log("onPlay - args: ", arguments);
+    // set UI state
+  };
+
+  this._currentPlayer.callback.onPause = function() {
+    console.log("onPause - args: ", arguments);
+    // set UI state
+  };
 };
 
 Main.prototype.play = function(){
