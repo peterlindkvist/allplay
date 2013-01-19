@@ -1,0 +1,12 @@
+TestPage
+
+<script>
+$().ready(function(){
+	player = new players.BasicPlayer('Drommar.wav');
+	player.onReady  =  function(){
+	  console.log('###');
+	  player.play()
+	}
+	player.onEnd = function(){ console.log('ENDED') }
+});	
+</script> 
