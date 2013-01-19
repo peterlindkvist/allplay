@@ -138,7 +138,7 @@ players.SoundCloudPlayer.prototype.getDuration = function() {
 };
 
 players.SoundCloudPlayer.prototype.getPosition = function() {
-  if (!this._soundObj.position) return 0;
+  if (!this._soundObj.loadedSound.position) return 0;
   return this._soundObj.loadedSound.position;
 };
 
