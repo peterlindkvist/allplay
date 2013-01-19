@@ -185,7 +185,10 @@ players.SoundCloudPlayer.getMetaData = function(url, callback) {
   var p = new players.SoundCloudPlayer(url, false);
   p.setupSDK(function() {
     SC.get("/resolve", { url: url }, function(trackData) {
-      $.extend(trackData, { type: "soundcloud" });
+      $.extend(trackData, {
+        type: "soundcloud",
+        author: trackData.user.username
+      });
       callback(trackData);
     });
   });
