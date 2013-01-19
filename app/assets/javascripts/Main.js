@@ -46,18 +46,21 @@ Main.prototype.loadNext = function() {
 	var self = this;
 
 	var url = this._playlist.songs[this._index].url;
-	this._currentPlayer = PlayerFactory.resolve(url, this.index);
+	console.log("init", this._index)
+	this._currentPlayer = PlayerFactory.resolve(url, this._index);
 	this._currentPlayer.callback.onReady = function(id){
 		self.play();
 	};
 
   this._currentPlayer.callback.onPlay = function(id) {
     console.log("onPlay - args: ", arguments);
+	$('.js-list-item-'+id).addClass('playing').removeClass('pausing');
     // set UI state
   };
 
   this._currentPlayer.callback.onPause = function(id) {
     console.log("onPause - args: ", arguments);
+	$('.js-list-item-'+id).addClass('pausing').removeClass('playing');
     // set UI state
   };
 
@@ -65,6 +68,7 @@ Main.prototype.loadNext = function() {
 		console.log("onEnd");
 		self._index ++;
 		self.loadNext();
+		$('.js-list-item-'+id).removeClass('pausing').removeClass('playing');
 		// set UI state
 	};
 };
