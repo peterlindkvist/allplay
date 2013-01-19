@@ -26,7 +26,7 @@ players.SoundCloudPlayer = function(url, autoInitialize) {
 };
 
 players.SoundCloudPlayer.prototype.setupSDK = function(callback) {
-  console.log("SCPlayer - setupSDK");
+  //console.log("SCPlayer - setupSDK");
   var self = this;
 
   if (document.querySelector("[src='"+Settings.soundcloud.sdk_uri+"']")) {
@@ -45,7 +45,7 @@ players.SoundCloudPlayer.prototype.setupSDK = function(callback) {
 };
 
 players.SoundCloudPlayer.prototype.onSDKLoad = function(callback) {
-  console.log("SCPlayer - onSDKLoad");
+  //console.log("SCPlayer - onSDKLoad");
 
   SC.initialize({ client_id: Settings.soundcloud.client_id });
 
@@ -53,16 +53,16 @@ players.SoundCloudPlayer.prototype.onSDKLoad = function(callback) {
 };
 
 players.SoundCloudPlayer.prototype.onSDKLoadError = function() {
-  console.log("SCPlayer - onSDKLoadError: ", arguments);
+  //console.log("SCPlayer - onSDKLoadError: ", arguments);
 };
 
 players.SoundCloudPlayer.prototype.prepareForPlayback = function(callback) {
-  console.log("SCPlayer - prepareForPlayback");
+  //console.log("SCPlayer - prepareForPlayback");
   var self = this;
 
   if (!this._soundObj.track) {
     SC.get("/resolve", { url: this._soundObj.uri }, function(track) {
-      console.log("SCPlayer - resolved track data: ", track);
+      //console.log("SCPlayer - resolved track data: ", track);
       self._soundObj.track = track;
       self.prepareForPlayback(callback);
     });
@@ -71,7 +71,7 @@ players.SoundCloudPlayer.prototype.prepareForPlayback = function(callback) {
 
   if (!this._soundObj.loadedSound) {
     SC.stream("/tracks/"+this._soundObj.track.id, function(loadedSound) {
-      console.log("SCPlayer - loaded sound data: ", loadedSound);
+      //console.log("SCPlayer - loaded sound data: ", loadedSound);
       self._soundObj.loadedSound = loadedSound;
       window.loadedSound = loadedSound;
       self.prepareForPlayback(callback);
@@ -84,7 +84,7 @@ players.SoundCloudPlayer.prototype.prepareForPlayback = function(callback) {
 };
 
 players.SoundCloudPlayer.prototype.play = function() {
-  console.log("SCPlayer play");
+  //console.log("SCPlayer play");
 
   var self = this;
 
@@ -99,7 +99,7 @@ players.SoundCloudPlayer.prototype.play = function() {
 };
 
 players.SoundCloudPlayer.prototype.pause = function() {
-  console.log("SCPlayer pause");
+  //console.log("SCPlayer pause");
 
   if (this._soundObj.loadedSound.paused) return;
   this._soundObj.loadedSound.pause();
@@ -108,7 +108,7 @@ players.SoundCloudPlayer.prototype.pause = function() {
 };
 
 players.SoundCloudPlayer.prototype.togglePause = function() {
-  //console.log("SCPlayer pause");
+  ////console.log("SCPlayer pause");
 
   if (this._soundObj.loadedSound.paused) {
     this.play();
@@ -119,7 +119,7 @@ players.SoundCloudPlayer.prototype.togglePause = function() {
 };
 
 players.SoundCloudPlayer.prototype.stop = function() {
-  console.log("SCPlayer stop");
+  //console.log("SCPlayer stop");
 
   if (this._soundObj.loadedSound.playState === 0) return;
   this._soundObj.loadedSound.stop();
@@ -129,14 +129,14 @@ players.SoundCloudPlayer.prototype.stop = function() {
  * @param integer pos Position in seconds
  */
 players.SoundCloudPlayer.prototype.seek = function(pos) {
-  console.log("SCPlayer seek", pos);
+  //console.log("SCPlayer seek", pos);
 
   if (!this._soundObj.loadedSound) return;
   this._soundObj.loadedSound.setPosition(pos * 1000);
 };
 
 players.SoundCloudPlayer.prototype.dispose = function() {
-  console.log("SCPlayer dispose");
+  //console.log("SCPlayer dispose");
   this.stop();
   this._soundObj.loadedSound.destruct();
   this._soundObj = null;
@@ -169,7 +169,7 @@ players.SoundCloudPlayer.prototype.getDuration = function() {
  */
 players.SoundCloudPlayer.prototype.getPosition = function() {
   var position = 0;
-  if (!this._soundObj.loadedSound && this._soundObj.loadedSound.loaded) return position;
+  if (!this._soundObj.loadedSound) return position;
   position = this._soundObj.loadedSound.position;
 
   return position / 1000;
