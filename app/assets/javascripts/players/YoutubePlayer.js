@@ -87,7 +87,7 @@ players.YoutubePlayer.supportsURL = function(url){
   return url.indexOf("www.youtube.com") != -1;
 };
 
-players.YoutubePlayer.getMetadata = function(url, callback){
+players.YoutubePlayer.getMetaData = function(url, callback){
   var id = players.YoutubePlayer._getVideoID(url);
 
   $.ajax({
@@ -95,6 +95,7 @@ players.YoutubePlayer.getMetadata = function(url, callback){
     dataType: "jsonp",
     success: function (data) {
       var ret = {
+        type : 'youtube',
         title: data.entry.title.$t,
         author: data.entry.author[0].name.$t,
         duration: data.entry.media$group.yt$duration.seconds

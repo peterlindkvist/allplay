@@ -159,7 +159,7 @@ Main.prototype.stop = function() {
 };
 
 Main.prototype.addSong = function(url){
-  players.YoutubePlayer.getMetadata(url, function(data){
+  PlayerFactory.getMetadata(url, function(data){
     console.log("add", data);
   });
   //console.log("ADD song not implemented", url);
