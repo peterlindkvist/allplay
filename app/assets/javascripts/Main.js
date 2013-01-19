@@ -126,11 +126,19 @@ Main.prototype.play = function(){
 
 Main.prototype.pause = function() {
   if (!this._currentPlayer) return;
+  if (this._setPositionInterval) {
+    clearInterval(this._setPositionInterval);
+    this._setPositionInterval = null;
+  }
   if ("pause" in this._currentPlayer) this._currentPlayer.pause();
 };
 
 Main.prototype.togglePause = function() {
   if (!this._currentPlayer) return;
+  if (this._setPositionInterval) {
+    clearInterval(this._setPositionInterval);
+    this._setPositionInterval = null;
+  }
   if ("togglePause" in this._currentPlayer) this._currentPlayer.togglePause();
 };
 
