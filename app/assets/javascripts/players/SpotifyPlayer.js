@@ -48,6 +48,8 @@ players.SpotifyPlayer.prototype._onCallback = function(message){
   console.log("callback", message);
   this.duration = message.duration;
   this.position = message.position;
+  this.isPlaying = message.playing;
+  this._retrivedTime = (new Date()).getTime()
   switch(message.command){
     case "onload" :
       this.callback.onReady();
@@ -106,7 +108,11 @@ players.SpotifyPlayer.prototype.getDuration = function() {
  * @return integer Position in seconds
  */
 players.SpotifyPlayer.prototype.getPosition = function() {
-  this.position / 1000;
+  var offset = 0
+  if(this.isPlaying){
+    offset = (new Date()).getTime() - this._retrivedTime;
+  }
+  return (this.position + offset) / 1000;
 };
 
 players.SpotifyPlayer.prototype._send = function(message){
