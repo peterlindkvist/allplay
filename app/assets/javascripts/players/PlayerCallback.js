@@ -1,6 +1,6 @@
-window.players = players || {}
+var players = window.players || {};
 
-players.PlayerCallback = function(){}
+players.PlayerCallback = function(){};
 
 players.PlayerCallback.prototype.onReady = function(){};
 
