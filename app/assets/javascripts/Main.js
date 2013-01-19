@@ -1,7 +1,8 @@
 Main = function(){
   var self = this;
 
-  $.getJSON('/playlist.json', function(data){
+  var pl = document.location.hash ? '/lists/' + document.location.hash.substr(1) : '/playlist.json'
+  $.getJSON(pl, function(data){
     self.start(data);
   });
 };
@@ -164,6 +165,26 @@ Main.prototype.addSong = function(url){
     $(".js-add-song-title").html(data.title);
     $(".js-add-song-author").html(data.author);
     $(".js-add-song-duration").html(data.duration);
+
+    var data = {
+      song : {
+        title : data.title,
+        author : data.author,
+        duration : data.duration,
+        playertype : data.type,
+        url : url,
+        list_id : document.location.hash.substr(1)
+      }
+    }
+
+    $.ajax({
+      url : '/songs',
+      data : data,
+      type : 'post',
+      success: function(){
+        console.log("added");
+      }
+    })
   });
   //console.log("ADD song not implemented", url);
 };
