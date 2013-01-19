@@ -1,4 +1,4 @@
 class Song < ActiveRecord::Base
-  attr_accessible :artist, :duration, :list_id, :title, :url
+  attr_accessible :author, :duration, :list_id, :title, :url, :playertype
   belongs_to :list
 end
