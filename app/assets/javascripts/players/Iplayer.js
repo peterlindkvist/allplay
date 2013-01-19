@@ -21,6 +21,20 @@ players.IPlayer.prototype.dispose = function(){
 	console.log("IPLAYER dispose")
 };
 
+/**
+ * @return integer Duration in seconds
+ */
+players.IPlayer.prototype.getDuration = function() {
+  return 0;
+};
+
+/**
+ * @return integer Position in seconds
+ */
+players.IPlayer.prototype.getPosition = function() {
+  return 0;
+};
+
 players.IPlayer.supportsURL = function(url){
 	return false;
 };

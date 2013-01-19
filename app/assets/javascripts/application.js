@@ -11,9 +11,13 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+<<<<<<< HEAD
 //= require handlebars.runtime.js
+=======
+//= require libs/handlebars.runtime.js
+//= require libs/swfobject.js
+>>>>>>> 3b08a0dcc4dc52062ecaca241bcfefc450c53cf3
 //= require_tree ./templates
-//= require_tree ./libs
 //= require_tree .
 
 $().ready(function(){
