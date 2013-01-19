@@ -4,7 +4,11 @@ CREATE DATABASE allplay_development;
 CREATE DATABASE allplay_production;
 GRANT ALL PRIVILEGES ON DATABASE allplay_development to allplay;
 GRANT ALL PRIVILEGES ON DATABASE allplay_production to allplay;
-/q
+\q
+
+NOTE! MacOSX might require something like this:
+sudo sysctl -w kern.sysv.shmmax=16777216;
+sudo sysctl -w kern.sysv.shmall=4096;
 
 == Welcome to Rails
 
