@@ -166,12 +166,12 @@ Main.prototype.setCurrentPosition = function() {
   var position = this._currentPlayer.getPosition();
   //console.log("setCurrentPosition: ", position);
 
-  $('.js-list-item-'+this._index).find(".js-position").html(position);
+  $('.js-list-item-'+this._index).find(".js-position").html(Utils.formatTime(position));
 };
 
 Main.prototype.setCurrentDuration = function() {
   var duration = this._currentPlayer.getDuration();
   //console.log("setCurrentDuration: ", position);
 
-  $('.js-list-item-'+this._index).find(".js-duration").html(duration);
+  $('.js-list-item-'+this._index).find(".js-duration").html(Utils.formatTime(duration));
 };
