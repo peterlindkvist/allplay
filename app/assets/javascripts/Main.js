@@ -123,10 +123,7 @@ Main.prototype.play = function(){
 
   if ("play" in this._currentPlayer) this._currentPlayer.play();
 
-  if (this._setPositionInterval) {
-    clearInterval(this._setPositionInterval);
-    this._setPositionInterval = null;
-  }
+  if (this._setPositionInterval) clearInterval(this._setPositionInterval);
   this._setPositionInterval = setInterval(function() {
     self.setCurrentPosition();
     self.setCurrentDuration();
