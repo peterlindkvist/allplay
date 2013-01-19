@@ -31,7 +31,7 @@ players.IPlayer.prototype.getDuration = function() {
 /**
  * @return integer Position in seconds
  */
-players.SoundCloudPlayer.prototype.getPosition = function() {
+players.IPlayer.prototype.getPosition = function() {
   return 0;
 };
 
