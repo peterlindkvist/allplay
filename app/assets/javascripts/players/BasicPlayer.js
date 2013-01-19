@@ -21,10 +21,13 @@ players.BasicPlayer = function(url){
 		self.callback.onError();
 	}
 	
-	
 	this._sound.src=url;
 	
 };
+
+players.BasicPlayer.isSupported = function(url){
+	return /.*\.(wav)/.test(url);
+}
 
 players.BasicPlayer.prototype.play = function(){
 	this._sound.play();
@@ -35,10 +38,8 @@ players.BasicPlayer.prototype.pause = function(){
 };
 
 players.BasicPlayer.prototype.seek = function(){
-
 };
 
 players.BasicPlayer.prototype.dispose = function(){
-	
 };
 
