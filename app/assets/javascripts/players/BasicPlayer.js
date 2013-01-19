@@ -33,7 +33,7 @@ players.BasicPlayer = function(url,id){
 	
 };
 
-players.BasicPlayer.isSupported = function(url){
+players.BasicPlayer.supportsURL = function(url){
 	return /.*\.(wav)/.test(url);
 }
 

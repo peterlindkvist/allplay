@@ -35,7 +35,6 @@ players.YoutubePlayer.prototype._onReady = function(player){
 };
 
 players.YoutubePlayer.prototype._onStateCallback = function(state){
-	console.log("state",state)
 	switch(state){
 		case 0:
 			this.callback.onEnd(this._id);
@@ -68,10 +67,7 @@ players.YoutubePlayer.prototype.dispose = function(){
 	$('js-player').html();
 };
 
-players.YoutubePlayer.isSupported = function(url){
+players.YoutubePlayer.supportsURL = function(url){
 	return url.indexOf("www.youtube.com") != -1;
 };
-
-
-
 
