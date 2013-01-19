@@ -41,6 +41,11 @@ Main.prototype.setupEvents = function() {
       self._index++;
       self.loadNext();
     })
+    .on("click", ".js-previous_button", function(e) {
+      e.preventDefault();
+      self._index--;
+      self.loadNext();
+    })
     .on("click", ".js-play_item_button", function(e) {
       self._index = $(this).data('id');
       self._index++;
@@ -51,13 +56,25 @@ Main.prototype.setupEvents = function() {
       var url = $input.val();
       self.addSong($input.val());
     });
+
+  $(document).on("keyup", function(e) {
+    if (e.keyCode === 32) {  // space
+      e.preventDefault();
+      self.togglePause();
+    }
+  });
 };
 
 Main.prototype.loadNext = function() {
   var self = this;
 
-  if (self._index === this._playlist.songs.length)
-    self._index = 0;  // reached end, go to beginning
+  if (this._index === this._playlist.songs.length)
+    this._index = 0;  // reached end, go to beginning
+
+  if (this._index < 0) {
+    this._index = this._playlist.songs.length - 1;  // attempting to play song before first one, move to last one
+    console.log("move to last - index: ", this._index);
+  }
 
   if(this._currentPlayer){
     this._currentPlayer.dispose();
@@ -100,7 +117,12 @@ Main.prototype.play = function(){
 
 Main.prototype.pause = function() {
   if (!this._currentPlayer) return;
-	if ("pause" in this._currentPlayer) this._currentPlayer.pause();
+  if ("pause" in this._currentPlayer) this._currentPlayer.pause();
+};
+
+Main.prototype.togglePause = function() {
+  if (!this._currentPlayer) return;
+  if ("togglePause" in this._currentPlayer) this._currentPlayer.togglePause();
 };
 
 Main.prototype.stop = function() {
@@ -109,5 +131,5 @@ Main.prototype.stop = function() {
 };
 
 Main.prototype.addSong = function(url){
-  console.log("ADD song not implemented", url)
+  console.log("ADD song not implemented", url);
 };
