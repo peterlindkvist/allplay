@@ -41,11 +41,11 @@ Main.prototype.setupEvents = function() {
 
 Main.prototype.loadNext = function() {
 	var self = this;
-	console.log("item", this._playlist, this._playlist[this._index])
+
 	var url = this._playlist.songs[this._index].url;
 	this._currentPlayer = PlayerFactory.resolve(url);
 
-	this._currentPlayer.callback.ready = function(){
+	this._currentPlayer.callback.onReady = function(){
 		self.startPlaying();
 	} 
 

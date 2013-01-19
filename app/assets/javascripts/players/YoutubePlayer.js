@@ -23,7 +23,6 @@ players.YoutubePlayer.prototype.seek = function(){};
 players.YoutubePlayer.prototype.dispose = function(){};
 
 players.YoutubePlayer.isSupported = function(url){
-	console.log("url", url)
 	return url.indexOf("www.youtube.com") != -1;
 };
 
