@@ -130,6 +130,26 @@ players.SpotifyPlayer.supportsURL = function(url){
 };
 
 players.SpotifyPlayer.getMetaData = function(url, callback){
+  var id = this._getID(url)
+  var full = 'http://ws.spotify.com/lookup/1/.json?uri=spotify:track:' + id;
+  $.ajax({
+    url : full,
+    dataType: "json",
+    success: function (data) {
+      console.log("data", data);
+      var artists = [];
+      for(var i = 0; i < data.track.artists.length;i++){
+        artists.push(data.track.artists.name);
+      }
+      var ret = {
+        type : 'spotify',
+        title: data.track.name,
+        author: artists.join(", "),
+        duration: data.track.length
+      }
+      callback.call(null, ret);
+    }
+  });
 
 };
 
