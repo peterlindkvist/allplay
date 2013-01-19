@@ -17,7 +17,7 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @list }
+      format.json { render :json => @list.to_json(:include => [:songs]) }
     end
   end
 
