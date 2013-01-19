@@ -44,7 +44,6 @@ Main.prototype.loadNext = function() {
 
 	var url = this._playlist.songs[this._index].url;
 	this._currentPlayer = PlayerFactory.resolve(url);
-
 	this._currentPlayer.callback.onReady = function(){
 		self.play();
 	};
