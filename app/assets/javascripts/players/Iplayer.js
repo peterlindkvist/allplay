@@ -5,7 +5,6 @@ players.IPlayer = function(){
 	//on the api playback event call this.callback.onEnd() ...
 };
 
-
 players.IPlayer.prototype.play = function(){};
 
 players.IPlayer.prototype.pause = function(){};

@@ -18,7 +18,7 @@ Main.prototype.loadnext = function() {
 	var url = this._playlist[this._index];
 	this._currentPlayer = PlayerFactory.resolve(url);
 
-	this._currentPlayer.callback.ready = function(){
+	this._currentPlayer.callback.onReady = function(){
 		self.startPlaying();
 	}
 }
