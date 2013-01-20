@@ -24,7 +24,7 @@ PlayerFactory.resolve = function(url){
     return new players.SpotifyPlayer(url);
   }
 
-  if (players.BasicPlayer.supportsURL(url))
+  if (players.BasicPlayer.supportsURL(url)){
     return new players.BasicPlayer(url);
   };
 

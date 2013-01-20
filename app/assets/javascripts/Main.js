@@ -62,7 +62,13 @@ Main.prototype.setupEvents = function() {
       //var $input = $('#' + $(this).data('input'));
       var url = prompt("URL: ");//$input.val();
 	  if (url) self.addSong(url);
+    })
+    .on("drop", ".js-add-song", function(e) {
+		console.log('DROPAREA', e);
+		evt.stopPropagation();
+	    evt.preventDefault();
     });
+;
 
   $(document).on("keyup", function(e) {
     if (e.keyCode === 32) {  // space
