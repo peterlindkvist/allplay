@@ -53,21 +53,17 @@ Main.prototype.setupEvents = function() {
       e.preventDefault();
 
       $('.js-list-item-'+self._index).removeClass('pausing').removeClass('playing');
-      self._index++;
-      self.loadNext();
+      self.playNext();
     })
     .on("click", ".js-previous_button", function(e) {
       e.preventDefault();
 
-      $('.js-list-item-'+self._index).removeClass('pausing').removeClass('playing');
-      self._index--;
-      self.loadNext();
+      this.playPrevious();
     })
     .on("click", ".js-play_item_button", function(e) {
       e.preventDefault();
       self._index = $(this).data('id');
-      self._index++;
-      self.loadNext();
+      self.playNext();
     })
     .on("click", ".js-add-song", function(e) {
       //var $input = $('#' + $(this).data('input'));
@@ -94,7 +90,27 @@ Main.prototype.setupEvents = function() {
       e.preventDefault();
       self.togglePause();
     }
+    if (e.keyCode === 37) {  // left arrow
+      e.preventDefault();
+      self.playPrevious();
+    }
+    if (e.keyCode === 39) {  // right arrow
+      e.preventDefault();
+      self.playNext();
+    }
   });
+};
+
+Main.prototype.playPrevious = function() {
+  $(".js-list-item-"+this._index).removeClass("pausing").removeClass("playing");
+  this._index--;
+  this.loadNext();
+};
+
+Main.prototype.playNext = function() {
+  $(".js-list-item-"+this._index).removeClass("pausing").removeClass("playing");
+  this._index++;
+  this.loadNext();
 };
 
 Main.prototype.loadNext = function() {
