@@ -30,7 +30,7 @@ var Remote = function(){
     presence : function(data){
       console.log("presense", data)
       if(data.action == 'leave'){
-        self.pause()
+        //self._player.playing = false;
       }
     }
   })

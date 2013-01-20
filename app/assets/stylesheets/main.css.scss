@@ -220,6 +220,12 @@ input[type="number"]::-webkit-inner-spin-button {
 .hide_text { text-indent: -999em }
 .outline_0 { outline: 0 }
 
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .padding_0 { padding: 0 }
 .padding_h_0 { padding-left: 0; padding-right: 0 }
 .padding_v_0 { padding-top: 0; padding-bottom: 0 }

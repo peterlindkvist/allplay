@@ -4,6 +4,11 @@ Handlebars.registerHelper("formatTime", function(time) {
   return Utils.formatTime(time)
 });
 
+Handlebars.registerHelper("artwork", function(url) {
+  return url ? url : 'http://aura-healingbyphone.com/index_files/Audio%20File%20Icon.gif'
+});
+
+
 Utils.formatTime = function(time) {
   var
     minutes = Math.floor(time / 60),
