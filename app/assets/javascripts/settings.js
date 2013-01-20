@@ -4,9 +4,8 @@ window.Settings = {
     sdk_uri: "http://connect.soundcloud.com/sdk.js"
   },
   rdio: {
-    api_key: "cpz2nup8vgxgj2w4fupwx4tk",
-    swf_uri: "http://www.rdio.com/api/swf/",
-    playback_token: "GAlNi78J_____zlyYWs5ZG02N2pkaHlhcWsyOWJtYjkyN2xvY2FsaG9zdEbwl7EHvbylWSWFWYMZwfc=",
+    client_id: "YxxQ7Ug8Q7ytho9B8qOzDg",
+    api_uri: "https://rdio.com/api/api.js?client_id=",
     domain: "localhost"
   }
 }

@@ -98,17 +98,32 @@ Main.prototype.loadNext = function() {
   };
 
   this._currentPlayer.callback.onPlay = function(id) {
-  $('.js-list-item-'+self._index).addClass('playing').removeClass('pausing');
+    if (this._setPositionInterval) clearInterval(this._setPositionInterval);
+    this._setPositionInterval = setInterval(function() {
+      self.setCurrentPosition();
+      self.setCurrentDuration();
+    }, 500);
+
     // set UI state
+    $('.js-list-item-'+self._index).addClass('playing').removeClass('pausing');
   };
 
   this._currentPlayer.callback.onPause = function(id) {
+    if (this._setPositionInterval) {
+      clearInterval(this._setPositionInterval);
+      this._setPositionInterval = null;
+    }
 
     // set UI state
     $('.js-list-item-'+self._index).addClass('pausing').removeClass('playing');
   };
 
   this._currentPlayer.callback.onEnd = function(id) {
+    if (this._setPositionInterval) {
+      clearInterval(this._setPositionInterval);
+      this._setPositionInterval = null;
+    }
+
     console.log("onEnd");
     $('.js-list-item-'+self._index).removeClass('pausing').removeClass('playing');
     self._index ++;
@@ -122,41 +137,23 @@ Main.prototype.play = function(){
   var self = this;
 
   if ("play" in this._currentPlayer) this._currentPlayer.play();
-
-  if (this._setPositionInterval) clearInterval(this._setPositionInterval);
-  this._setPositionInterval = setInterval(function() {
-    self.setCurrentPosition();
-    self.setCurrentDuration();
-  }, 500);
 };
 
 Main.prototype.pause = function() {
   if (!this._currentPlayer) return;
 
-  if (this._setPositionInterval) {
-    clearInterval(this._setPositionInterval);
-    this._setPositionInterval = null;
-  }
   if ("pause" in this._currentPlayer) this._currentPlayer.pause();
 };
 
 Main.prototype.togglePause = function() {
   if (!this._currentPlayer) return;
 
-  if (this._setPositionInterval) {
-    clearInterval(this._setPositionInterval);
-    this._setPositionInterval = null;
-  }
   if ("togglePause" in this._currentPlayer) this._currentPlayer.togglePause();
 };
 
 Main.prototype.stop = function() {
   if (!this._currentPlayer) return;
 
-  if (this._setPositionInterval) {
-    clearInterval(this._setPositionInterval);
-    this._setPositionInterval = null;
-  }
   if ("stop" in this._currentPlayer) this._currentPlayer.stop();
 };
 
