@@ -66,7 +66,7 @@ players.RdioPlayer.prototype.resolve = function(callback) {
     content: { url: this._soundObj.uri },
     success: function(response) {
       var trackData = response.result;
-      console.log("RPlayer - resolved track data: ", trackData);
+      //console.log("RPlayer - resolved track data: ", trackData);
 
       self._soundObj.trackData = trackData;
       callback(trackData);

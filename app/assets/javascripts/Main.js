@@ -1,4 +1,4 @@
-	Main = function(){
+  Main = function(){
   var self = this;
 
   window.onhashchange =  function(){
@@ -44,6 +44,11 @@ Main.prototype.setupEvents = function() {
   var self = this;
 
   $("body")
+    .on("click", ".js-list_item", function(e) {
+      e.preventDefault();
+      self._index = $(e.currentTarget).index();
+      self.loadNext();
+    })
     .on("click", ".js-play_button", function(e) {
       e.preventDefault();
       self.play();
@@ -58,39 +63,32 @@ Main.prototype.setupEvents = function() {
     })
     .on("click", ".js-next_button", function(e) {
       e.preventDefault();
-
-      $('.js-list-item-'+self._index).removeClass('pausing').removeClass('playing');
       self.playNext();
     })
     .on("click", ".js-previous_button", function(e) {
       e.preventDefault();
-
       this.playPrevious();
     })
     .on("click", ".js-play_item_button", function(e) {
       e.preventDefault();
-      self._index = $(this).data('id');
-      self.playNext();
+      self.loadNext();
     })
     .on("click", ".js-add-song", function(e) {
       //var $input = $('#' + $(this).data('input'));
       var url = prompt("URL: ");//$input.val();
-	  if (url) self.addSong(url);
+      if (url) self.addSong(url);
     })
     .on("drop", ".js-add-song", function(e) {
-		e.stopPropagation();
-	    e.preventDefault();
-		url = e.originalEvent.dataTransfer.getData("Text");
-		console.log(url);
-		if (url) self.addSong(url)
-		
+      e.stopPropagation();
+      e.preventDefault();
+      url = e.originalEvent.dataTransfer.getData("Text");
+      console.log(url);
+      if (url) self.addSong(url)
     })
-	.on("dragover", ".js-add-song", function(e) {
-		e.stopPropagation();
-	    e.preventDefault();
+    .on("dragover", ".js-add-song", function(e) {
+      e.stopPropagation();
+      e.preventDefault();
     });
-;
-
 
   $(document)
     .on("keydown", function(e) {
@@ -120,13 +118,11 @@ Main.prototype.setupEvents = function() {
 };
 
 Main.prototype.playPrevious = function() {
-  $(".js-list-item-"+this._index).removeClass("pausing").removeClass("playing");
   this._index--;
   this.loadNext();
 };
 
 Main.prototype.playNext = function() {
-  $(".js-list-item-"+this._index).removeClass("pausing").removeClass("playing");
   this._index++;
   this.loadNext();
 };
@@ -139,6 +135,7 @@ Main.prototype.loadNext = function() {
   if (this._currentPlayer){
     this.setLoadingStateForCurrentItem(false);
     this._currentPlayer.dispose();
+    $(".js-list_item").removeClass("playing playing");  // remove current play state
   }
 
   if (this._index === this._playlist.songs.length)
@@ -220,7 +217,7 @@ Main.prototype.stop = function() {
 };
 
 Main.prototype.addSong = function(url) {
-  var self = this;	
+  var self = this;  
   PlayerFactory.getMetaData(url, function(data) {
     var data = {
       song : {
