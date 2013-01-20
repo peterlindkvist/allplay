@@ -1,6 +1,6 @@
 "use strict";
 
-var Main = function(){
+var Remote = function(){
   var self = this;
   this.sp = getSpotifyApi();
   this.models = this.sp.require('$api/models');
@@ -12,7 +12,7 @@ var Main = function(){
     self._onStateCallback(event);
   });
 
-  $('.js-channel').html(this._channel_id);
+  document.getElementById('js-channel').innerText = this._channel_id;
 
   this.pubnub = PUBNUB.init({
     publish_key   : 'demo',
@@ -26,11 +26,17 @@ var Main = function(){
     },
     connect : function(channel) {
       console.log("connect", channel);
+    },
+    presence : function(data){
+      console.log("presense", data)
+      if(data.action == 'leave'){
+        self.pause()
+      }
     }
   })
 }
 
-Main.prototype._onStateCallback = function(state){
+Remote.prototype._onStateCallback = function(state){
   //console.log("state", state, this._player.position, this._player.track.duration);
 
   this._send({
@@ -42,7 +48,7 @@ Main.prototype._onStateCallback = function(state){
   });
 }
 
-Main.prototype._send = function(message){
+Remote.prototype._send = function(message){
   console.log("send", this._channel_id, message);
   var self = this;
   this.pubnub.publish({
@@ -51,7 +57,7 @@ Main.prototype._send = function(message){
   });
 }
 
-Main.prototype._onCallback = function(message){
+Remote.prototype._onCallback = function(message){
   console.log("message", message);
   switch(message.command){
     case "load":
@@ -69,5 +75,5 @@ Main.prototype._onCallback = function(message){
 }
 
 window.onload = function() {
-  var main = new Main();
+  var app = new Remote();
 }

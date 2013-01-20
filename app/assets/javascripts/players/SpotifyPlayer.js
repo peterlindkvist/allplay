@@ -5,14 +5,7 @@ players.SpotifyPlayer = function(url,id){
   var self = this;
   this.callback = new players.PlayerCallback();
 
-  if($.cookie('spotify_channel_id')) {
-    this._channel_id = $.cookie('spotify_channel_id')
-  }else{
-    this._channel_id = (Math.random() + "").substr(2);
-    $.cookie('spotify_channel_id', this._channel_id);
-    document.location.href = "spotify:app:remote:" + this._channel_id;
-    //alert("open remote app with\nspotify:app:remote:" + this._channel_id);
-  }
+  this._channel_id = players.SpotifyPlayer.getChannel();
 
   this.url = url;
   this._id = id;
@@ -163,6 +156,19 @@ players.SpotifyPlayer.getMetaData = function(url, callback){
 
 players.SpotifyPlayer._getID = function(url){
   return url.split('/').pop();
+}
+
+players.SpotifyPlayer.getChannel = function(){
+  var channel_id
+  if($.cookie('spotify_channel_id')) {
+    channel_id = $.cookie('spotify_channel_id')
+  }else{
+    channel_id = (Math.random() + "").substr(2);
+    $.cookie('spotify_channel_id', channel_id);
+    //document.location.href = "spotify:app:remote:" + this._channel_id;
+    //alert("open remote app with\nspotify:app:remote:" + this._channel_id);
+  }
+  return channel_id
 }
 
 
