@@ -10,7 +10,8 @@ players.SpotifyPlayer = function(url,id){
   }else{
     this._channel_id = (Math.random() + "").substr(2);
     $.cookie('spotify_channel_id', this._channel_id);
-    alert("open remote app with\nspotify:app:remote:" + this._channel_id);
+    document.location.href = "spotify:app:remote:" + this._channel_id;
+    //alert("open remote app with\nspotify:app:remote:" + this._channel_id);
   }
 
   this.url = url;
