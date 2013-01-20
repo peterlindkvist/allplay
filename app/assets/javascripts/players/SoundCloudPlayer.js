@@ -30,7 +30,7 @@ players.SoundCloudPlayer.prototype.setupSDK = function(callback) {
   var self = this;
 
   if (document.querySelector("[src='"+Settings.soundcloud.sdk_uri+"']")) {
-    console.info("SoundCloud SDK already initialized");
+    //console.info("SoundCloud SDK already initialized");
     this.onSDKLoad(callback);
     return;
   }

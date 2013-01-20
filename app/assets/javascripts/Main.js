@@ -82,7 +82,6 @@ Main.prototype.setupEvents = function() {
       var name = prompt("Enter name of playlist: ");//$input.val();
       if (name) self.addPlaylist(name);
     })
-
     .on("drop", ".js-add-song", function(e) {
       e.stopPropagation();
       e.preventDefault();
