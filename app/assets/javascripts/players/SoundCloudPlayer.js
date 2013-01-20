@@ -11,7 +11,7 @@ players.SoundCloudPlayer = function(url, autoInitialize) {
 
   this._soundObj = {
     uri: url,
-    track: null,
+    trackData: null,
     loadedSound: null
   };
 
@@ -60,17 +60,17 @@ players.SoundCloudPlayer.prototype.prepareForPlayback = function(callback) {
   //console.log("SCPlayer - prepareForPlayback");
   var self = this;
 
-  if (!this._soundObj.track) {
-    SC.get("/resolve", { url: this._soundObj.uri }, function(track) {
-      //console.log("SCPlayer - resolved track data: ", track);
-      self._soundObj.track = track;
+  if (!this._soundObj.trackData) {
+    SC.get("/resolve", { url: this._soundObj.uri }, function(trackData) {
+      //console.log("SCPlayer - resolved track data: ", trackData);
+      self._soundObj.trackData = trackData;
       self.prepareForPlayback(callback);
     });
     return false;
   }
 
   if (!this._soundObj.loadedSound) {
-    SC.stream("/tracks/"+this._soundObj.track.id, function(loadedSound) {
+    SC.stream("/tracks/"+this._soundObj.trackData.id, function(loadedSound) {
       //console.log("SCPlayer - loaded sound data: ", loadedSound);
       self._soundObj.loadedSound = loadedSound;
       window.loadedSound = loadedSound;
