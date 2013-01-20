@@ -33,7 +33,7 @@ players.RdioPlayer.prototype.setupSDK = function(callback) {
   var SDKURI = Settings.rdio.api_uri + Settings.rdio.client_id;
 
   if (document.querySelector("[src='"+SDKURI+"']") && "R" in window) {
-    console.info("Rdio SDK already initialized");
+    //console.info("Rdio SDK already initialized");
     this.onSDKLoad(callback);
     return;
   }
@@ -48,7 +48,7 @@ players.RdioPlayer.prototype.setupSDK = function(callback) {
 };
 
 players.RdioPlayer.prototype.onSDKLoad = function(callback) {
-  console.log("RPlayer - onSDKLoad");
+  //console.log("RPlayer - onSDKLoad");
 
   if (callback) callback();
 };
@@ -72,7 +72,7 @@ players.RdioPlayer.prototype.resolve = function(callback) {
       callback(trackData);
     },
     error: function(response) {
-      console.log("RPlayer - error: ", response);
+      //console.log("RPlayer - error: ", response);
     }
   });
 };
@@ -187,7 +187,8 @@ players.RdioPlayer.getMetaData = function(url, callback) {
         $.extend(trackData, {
           type: "rdio",
           author: trackData.artist,
-          title: trackData.name
+          title: trackData.name,
+          img: trackData.icon
         });
         callback(trackData);
       });

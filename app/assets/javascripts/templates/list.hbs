@@ -1,4 +1,4 @@
-<div class="units u2">
+<div class="units u2 margin_bottom_2">
   <h2 class="unit lh1_2 margin_bottom_1">
     <span class="text_almost_white block">Currently playing</span>
     <span class="fs30 bold">{{name}}</span>
@@ -9,6 +9,11 @@
     <!--<a href="#stop" class="js-stop_button">Stop</a>-->
     <a href="#previous" class="js-previous_button">Previous</a>
     <a href="#next" class="js-next_button">Next</a>
+    <br><br>
+    <div class="fs12 text_almost_white">
+      Left/right arrow for previous/next song.<br>
+      Space for play/pause.
+    </div>
   </div>
 </div>
 <button class="js-add-song fs30 bold width_100 bg_white" style="border: 1px rgb(226, 226, 226) solid">Add Song</button>
@@ -17,5 +22,6 @@
     {{> _song }}
     {{/each}}
 </ul>
-<button class="js-add-playlist fs30 bold width_100 bg_white margin_top_1" style="border: 1px rgb(226, 226, 226) solid">Add Playlist</button>
-
+<button class="js-add-playlist fs30 bold width_100 bg_white margin_top_1" style="border: 1px rgb(226, 226, 226) solid">
+  Create New Playlist
+</button>

@@ -14,9 +14,10 @@
 //= require libs/handlebars.runtime.js
 //= require libs/swfobject.js
 //= require libs/jquery.cookie.js
+//= require spin.min.js
 //= require_tree ./templates
 //= require_tree .
 
-$().ready(function(){
-	main = new Main();
-})
+$(function() {
+	var main = new Main();
+});
