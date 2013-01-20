@@ -4,6 +4,13 @@ Main = function(){
   window.onhashchange =  function(){
     self.loadPlaylist();
   }
+
+
+  var data = {
+    spotify_channel_id : players.SpotifyPlayer.getChannel()
+  };
+  $(".js-spotify").html(HandlebarsTemplates.spotify(data));
+
   this.loadPlaylist();
 
   this.setupEvents();
