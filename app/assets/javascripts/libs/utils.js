@@ -1,5 +1,9 @@
 var Utils = window.utils || {};
 
+Handlebars.registerHelper("formatTime", function(time) {
+  return Utils.formatTime(time)
+});
+
 Utils.formatTime = function(time) {
   var
     minutes = Math.floor(time / 60),

@@ -11,6 +11,7 @@ Main = function(){
 Main.prototype.start = function(playlist){
   for(var i = 0; i< playlist.songs.length;i++){
     playlist.songs[i].id = i;
+    playlist.songs[i].position = 0;
   }
   this._playlist = playlist;
   this._index = 0;
