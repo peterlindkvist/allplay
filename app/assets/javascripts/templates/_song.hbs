@@ -1,11 +1,15 @@
 <li class="js-list-item-{{id}} block list_item padding_1" data-id="{{id}}">
-  <strong class="block fs18 lh1_5">{{title}}</strong>
+  <strong class=" fs18 lh1_5">{{title}}</strong>
+  <!--span class=" fs18 lh1_5"> - {{author}}</span-->
   <div class="units u10">
     <div class="unit span_9">
       <span class="js-position">{{formatTime position}}</span> /
       <span class="js-duration align_right">{{formatTime duration}}</span>
     </div>
     <div class="unit">
+        <div class="right">
+            <span class="align_right ">{{url}}</span>
+        </div>
       <!--<a href="#" class="js-play_item_button play_item_button unit
         align_right border_0" data-id="{{id}}">Play</a>-->
     </div>
