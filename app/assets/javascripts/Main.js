@@ -54,7 +54,6 @@ Main.prototype.setupEvents = function() {
     })
     .on("click", ".js-play_item_button", function(e) {
       e.preventDefault();
-
       self._index = $(this).data('id');
       self._index++;
       self.loadNext();
@@ -65,9 +64,16 @@ Main.prototype.setupEvents = function() {
 	  if (url) self.addSong(url);
     })
     .on("drop", ".js-add-song", function(e) {
-		console.log('DROPAREA', e);
-		evt.stopPropagation();
-	    evt.preventDefault();
+		e.stopPropagation();
+	    e.preventDefault();
+		url = e.originalEvent.dataTransfer.getData("Text");
+		console.log(url);
+		if (url) self.addSong(url)
+		
+    })
+	.on("dragover", ".js-add-song", function(e) {
+		e.stopPropagation();
+	    e.preventDefault();
     });
 ;
 
