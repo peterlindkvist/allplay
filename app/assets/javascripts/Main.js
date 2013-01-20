@@ -1,24 +1,35 @@
 Main = function(){
   var self = this;
 
-  var pl = document.location.hash ? '/lists/' + document.location.hash.substr(1) : '/playlist.json'
-  $.getJSON(pl, function(data){
-    self.start(data);
-  });
-};
-
-
-Main.prototype.start = function(playlist){
-  for(var i = 0; i< playlist.songs.length;i++){
-    playlist.songs[i].id = i;
-    playlist.songs[i].position = 0;
+  window.onhashchange =  function(){
+    self.loadPlaylist();
   }
-  this._playlist = playlist;
-  this._index = 0;
-
-  $(".js-list").html(HandlebarsTemplates.list(playlist));
+  this.loadPlaylist();
 
   this.setupEvents();
+};
+
+Main.prototype.loadPlaylist = function(){
+  var self = this;
+
+  var pl = document.location.hash ? '/lists/' + document.location.hash.substr(1) : '/playlist.json'
+  $.getJSON(pl, function(data){
+    self._playlist = data;
+    self.start();
+  });
+}
+
+Main.prototype.start = function(){
+  for(var i = 0; i< this._playlist.songs.length;i++){
+    this._playlist.songs[i].id = i;
+    this._playlist.songs[i].position = 0;
+  }
+
+  this._index = 0;
+
+  $(".js-list").html(HandlebarsTemplates.list(this._playlist));
+
+
   this.loadNext();
 };
 
@@ -62,8 +73,13 @@ Main.prototype.setupEvents = function() {
     .on("click", ".js-add-song", function(e) {
       //var $input = $('#' + $(this).data('input'));
       var url = prompt("URL: ");//$input.val();
-	  if (url) self.addSong(url);
+      if (url) self.addSong(url);
+    }).on("click", ".js-add-playlist", function(e) {
+      //var $input = $('#' + $(this).data('input'));
+      var url = prompt("NAME: ");//$input.val();
+      if (url) self.addPlaylist(url);
     });
+
 
   $(document).on("keyup", function(e) {
     if (e.keyCode === 32) {  // space
@@ -174,9 +190,9 @@ Main.prototype.addSong = function(url) {
         list_id : document.location.hash.substr(1)
       }
     };
-	
+
     $.ajax({
-      url : '/songs',
+      url : '/songs.json',
       data : data,
       type : 'post',
       success: function() {
@@ -185,13 +201,37 @@ Main.prototype.addSong = function(url) {
     });
 
     data.song.id = self._playlist.songs.length;
+    data.song.position = 0;
     self._playlist.songs.push(data.song);
 
     var template = Handlebars.partials._song(data.song);
     $(".js-list ul").append(template);
+
+    if(self._playlist.songs.length == 1){
+      self.start();
+    }
   });
   //console.log("ADD song not implemented", url);
 };
+
+Main.prototype.addPlaylist = function(name){
+  var self = this;
+  var data = {
+    list : {
+      name : name
+    }
+  }
+  $.ajax({
+    url : '/lists.json',
+    data : data,
+    type : 'post',
+    success: function(data) {
+      self.pause();
+      document.location.hash = data.slug
+    }
+  });
+
+}
 
 Main.prototype.setCurrentPosition = function() {
   if (!("getPosition" in this._currentPlayer)) return;
