@@ -39,6 +39,8 @@ players.Buzz.getMetaData = function(url,callback){
 	var sound = new buzz.sound(url)
 	
 	sound.bind('canplay', function(url) { 
+		var file = new File(url);
+		console.log(file); 
 		var trackData = {
 	      title: "No title",
 		  duration:sound.getDuration(),

@@ -1,24 +1,35 @@
-Main = function(){
+	Main = function(){
+  var self = this;
+
+  window.onhashchange =  function(){
+    self.loadPlaylist();
+  }
+  this.loadPlaylist();
+
+  this.setupEvents();
+};
+
+Main.prototype.loadPlaylist = function(){
   var self = this;
 
   var pl = document.location.hash ? '/lists/' + document.location.hash.substr(1) : '/playlist.json'
   $.getJSON(pl, function(data){
-    self.start(data);
+    self._playlist = data;
+    self.start();
   });
-};
+}
 
-
-Main.prototype.start = function(playlist){
-  for(var i = 0; i< playlist.songs.length;i++){
-    playlist.songs[i].id = i;
-    playlist.songs[i].position = 0;
+Main.prototype.start = function(){
+  for(var i = 0; i< this._playlist.songs.length;i++){
+    this._playlist.songs[i].id = i;
+    this._playlist.songs[i].position = 0;
   }
-  this._playlist = playlist;
+
   this._index = 0;
 
-  $(".js-list").html(HandlebarsTemplates.list(playlist));
+  $(".js-list").html(HandlebarsTemplates.list(this._playlist));
 
-  this.setupEvents();
+
   this.loadNext();
 };
 
@@ -77,6 +88,7 @@ Main.prototype.setupEvents = function() {
     });
 ;
 
+
   $(document).on("keyup", function(e) {
     if (e.keyCode === 32) {  // space
       e.preventDefault();
@@ -90,6 +102,11 @@ Main.prototype.loadNext = function() {
 
   var self = this;
 
+  if (this._currentPlayer){
+    this.setLoadingStateForCurrentItem(false);
+    this._currentPlayer.dispose();
+  }
+
   if (this._index === this._playlist.songs.length)
     this._index = 0;  // reached end, go to beginning
 
@@ -98,16 +115,14 @@ Main.prototype.loadNext = function() {
     console.log("move to last - index: ", this._index);
   }
 
-  if(this._currentPlayer){
-    this._currentPlayer.dispose();
-  }
-
   var url = this._playlist.songs[this._index].url;
   this._currentPlayer = PlayerFactory.resolve(url, this._index);
+  this.setLoadingStateForCurrentItem(true);
 
   this._currentPlayer.callback.onReady = function(id){
     self.play();
-  $('.js-list-item-'+self._index).addClass('playing').removeClass('pausing');
+    self.setLoadingStateForCurrentItem(false);
+    $('.js-list-item-'+self._index).addClass('playing').removeClass('pausing');
   };
 
   this._currentPlayer.callback.onPlay = function(id) {
@@ -183,9 +198,9 @@ Main.prototype.addSong = function(url) {
         list_id : document.location.hash.substr(1)
       }
     };
-	
+
     $.ajax({
-      url : '/songs',
+      url : '/songs.json',
       data : data,
       type : 'post',
       success: function() {
@@ -194,13 +209,37 @@ Main.prototype.addSong = function(url) {
     });
 
     data.song.id = self._playlist.songs.length;
+    data.song.position = 0;
     self._playlist.songs.push(data.song);
 
     var template = Handlebars.partials._song(data.song);
     $(".js-list ul").append(template);
+
+    if(self._playlist.songs.length == 1){
+      self.start();
+    }
   });
   //console.log("ADD song not implemented", url);
 };
+
+Main.prototype.addPlaylist = function(name){
+  var self = this;
+  var data = {
+    list : {
+      name : name
+    }
+  }
+  $.ajax({
+    url : '/lists.json',
+    data : data,
+    type : 'post',
+    success: function(data) {
+      self.pause();
+      document.location.hash = data.slug
+    }
+  });
+
+}
 
 Main.prototype.setCurrentPosition = function() {
   if (!("getPosition" in this._currentPlayer)) return;
@@ -219,3 +258,31 @@ Main.prototype.setCurrentDuration = function() {
 
   $('.js-list-item-'+this._index).find(".js-duration").html(Utils.formatTime(duration));
 };
+
+Main.prototype.setLoadingStateForCurrentItem = function(isLoading) {
+  var $spinnerContainerEl = $(".js-list-item-"+this._index+" .js-spinner_container");
+  if (isLoading && !$spinnerContainerEl.children().length) {
+    $spinnerContainerEl[0].spinner = new Spinner({
+      lines: 13, // The number of lines to draw
+      length: 5, // The length of each line
+      width: 2, // The line thickness
+      radius: 6, // The radius of the inner circle
+      corners: 1, // Corner roundness (0..1)
+      rotate: 0, // The rotation offset
+      color: '#000', // #rgb or #rrggbb
+      speed: 1, // Rounds per second
+      trail: 60, // Afterglow percentage
+      shadow: false, // Whether to render a shadow
+      hwaccel: true, // Whether to use hardware acceleration
+      className: 'spinner', // The CSS class to assign to the spinner
+      zIndex: 2e9, // The z-index (defaults to 2000000000)
+      top: 'auto', // Top position relative to parent in px
+      left: 'auto' // Left position relative to parent in px
+    });
+    $spinnerContainerEl.append($spinnerContainerEl[0].spinner.spin().el);
+    return;
+  } else if (!isLoading && $spinnerContainerEl.children().length) {
+    $spinnerContainerEl[0].spinner.stop();
+  }
+};
+
