@@ -78,6 +78,11 @@ Main.prototype.loadNext = function() {
 
   var self = this;
 
+  if (this._currentPlayer){
+    this.setLoadingStateForCurrentItem(false);
+    this._currentPlayer.dispose();
+  }
+
   if (this._index === this._playlist.songs.length)
     this._index = 0;  // reached end, go to beginning
 
@@ -86,16 +91,14 @@ Main.prototype.loadNext = function() {
     console.log("move to last - index: ", this._index);
   }
 
-  if(this._currentPlayer){
-    this._currentPlayer.dispose();
-  }
-
   var url = this._playlist.songs[this._index].url;
   this._currentPlayer = PlayerFactory.resolve(url, this._index);
+  this.setLoadingStateForCurrentItem(true);
 
   this._currentPlayer.callback.onReady = function(id){
     self.play();
-  $('.js-list-item-'+self._index).addClass('playing').removeClass('pausing');
+    self.setLoadingStateForCurrentItem(false);
+    $('.js-list-item-'+self._index).addClass('playing').removeClass('pausing');
   };
 
   this._currentPlayer.callback.onPlay = function(id) {
@@ -207,3 +210,31 @@ Main.prototype.setCurrentDuration = function() {
 
   $('.js-list-item-'+this._index).find(".js-duration").html(Utils.formatTime(duration));
 };
+
+Main.prototype.setLoadingStateForCurrentItem = function(isLoading) {
+  var $spinnerContainerEl = $(".js-list-item-"+this._index+" .js-spinner_container");
+  if (isLoading && !$spinnerContainerEl.children().length) {
+    $spinnerContainerEl[0].spinner = new Spinner({
+      lines: 13, // The number of lines to draw
+      length: 5, // The length of each line
+      width: 2, // The line thickness
+      radius: 6, // The radius of the inner circle
+      corners: 1, // Corner roundness (0..1)
+      rotate: 0, // The rotation offset
+      color: '#000', // #rgb or #rrggbb
+      speed: 1, // Rounds per second
+      trail: 60, // Afterglow percentage
+      shadow: false, // Whether to render a shadow
+      hwaccel: true, // Whether to use hardware acceleration
+      className: 'spinner', // The CSS class to assign to the spinner
+      zIndex: 2e9, // The z-index (defaults to 2000000000)
+      top: 'auto', // Top position relative to parent in px
+      left: 'auto' // Left position relative to parent in px
+    });
+    $spinnerContainerEl.append($spinnerContainerEl[0].spinner.spin().el);
+    return;
+  } else if (!isLoading && $spinnerContainerEl.children().length) {
+    $spinnerContainerEl[0].spinner.stop();
+  }
+};
+
