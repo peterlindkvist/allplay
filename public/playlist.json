@@ -1,21 +1,7 @@
 {
   "name": "Test Playlist",
   "songs": [
-    {
-        "url" : "http://open.spotify.com/track/5E8pXD9M4k3IcCr9GtJnIj",
-        "title" : "Spotify Clip",
-        "duration": 0
-    },
-    {
-        "url" : "https://soundcloud.com/fatpossum/dropla",
-        "title" : "SoundCloud Clip",
-        "duration": 0
-    },
-    {
-        "url" : "http://open.spotify.com/track/0tDoBMgyAzGgLhs73KPrJL",
-        "title" : "Spotify Clip 2",
-        "duration": 0
-    },
+
     {
         "url" : "Drommar.wav",
         "title" : "Ajaj",
@@ -30,6 +16,21 @@
         "url" : "http://www.youtube.com/watch?v=6HA2D3LsJQs",
         "title" : "youtube",
         "duration": 0
-    }
+    },
+      {
+          "url" : "http://open.spotify.com/track/5E8pXD9M4k3IcCr9GtJnIj",
+          "title" : "Spotify Clip",
+          "duration": 0
+      },
+      {
+          "url" : "https://soundcloud.com/fatpossum/dropla",
+          "title" : "SoundCloud Clip",
+          "duration": 0
+      },
+      {
+          "url" : "http://open.spotify.com/track/0tDoBMgyAzGgLhs73KPrJL",
+          "title" : "Spotify Clip 2",
+          "duration": 0
+      }
   ]
 }
