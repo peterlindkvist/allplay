@@ -187,7 +187,8 @@ players.RdioPlayer.getMetaData = function(url, callback) {
         $.extend(trackData, {
           type: "rdio",
           author: trackData.artist,
-          title: trackData.name
+          title: trackData.name,
+          img: trackData.icon
         });
         callback(trackData);
       });
