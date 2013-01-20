@@ -184,7 +184,10 @@ Main.prototype.addSong = function(url) {
       }
     });
 
-    var template = Handlebars.partials._song($.extend(data.song, { id: self._playlist.songs.length }));
+    data.song.id = self._playlist.songs.length;
+    self._playlist.songs.push(data.song);
+
+    var template = Handlebars.partials._song(data.song);
     $(".js-list ul").append(template);
   });
   //console.log("ADD song not implemented", url);
