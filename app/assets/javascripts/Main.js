@@ -77,20 +77,31 @@ Main.prototype.setupEvents = function() {
     });
 
 
-  $(document).on("keyup", function(e) {
-    if (e.keyCode === 32) {  // space
-      e.preventDefault();
-      self.togglePause();
-    }
-    if (e.keyCode === 37) {  // left arrow
-      e.preventDefault();
-      self.playPrevious();
-    }
-    if (e.keyCode === 39) {  // right arrow
-      e.preventDefault();
-      self.playNext();
-    }
-  });
+  $(document)
+    .on("keydown", function(e) {
+      if (e.keyCode === 32)  // space
+        e.preventDefault();
+
+      if (e.keyCode === 37)  // left arrow
+        e.preventDefault();
+
+      if (e.keyCode === 39)  // right arrow
+        e.preventDefault();
+    })
+    .on("keyup", function(e) {
+      if (e.keyCode === 32) {  // space
+        e.preventDefault();
+        self.togglePause();
+      }
+      if (e.keyCode === 37) {  // left arrow
+        e.preventDefault();
+        self.playPrevious();
+      }
+      if (e.keyCode === 39) {  // right arrow
+        e.preventDefault();
+        self.playNext();
+      }
+    });
 };
 
 Main.prototype.playPrevious = function() {
