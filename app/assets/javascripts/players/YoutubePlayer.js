@@ -1,7 +1,7 @@
 var players = window.players || {};
 
 players.YoutubePlayer = function(url, id){
-  console.log("YoutubePlayer: ", id);
+  //console.log("YoutubePlayer: ", id);
   this._id = id;
   var self = this;
   var _domid = "js-player-inner";
@@ -10,7 +10,7 @@ players.YoutubePlayer = function(url, id){
   //on the api playback event call this.callback.onEnd() ...
 
   window.onYouTubePlayerReady = function(playerId) {
-    console.log("pl", playerId, _domid);
+    //console.log("pl", playerId, _domid);
     var player = document.getElementById(_domid);
     window.player = player;
     self._onReady(player);
