@@ -177,7 +177,7 @@ players.RdioPlayer.prototype.getPosition = function() {
  * Statics
  */
 players.RdioPlayer.supportsURL = function(url) {
-  return url.indexOf("rdio.com") > -1 || url.indexOf("rd.io/") > -1;
+  return (url.indexOf("rdio.com") > -1 || url.indexOf("rd.io/") > -1) && !Utils.isMobile();
 };
 players.RdioPlayer.getMetaData = function(url, callback) {
   var p = new players.RdioPlayer(url, false);

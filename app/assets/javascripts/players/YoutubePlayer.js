@@ -91,7 +91,7 @@ players.YoutubePlayer.prototype.getPosition = function() {
 };
 
 players.YoutubePlayer.supportsURL = function(url){
-  return url.indexOf("www.youtube.com") != -1;
+  return url.indexOf("www.youtube.com") != -1 && !Utils.isMobile();
 };
 
 players.YoutubePlayer.getMetaData = function(url, callback){
