@@ -101,11 +101,13 @@ players.YoutubePlayer.getMetaData = function(url, callback){
     url: "http://gdata.youtube.com/feeds/api/videos/" + id + "?v=2&alt=json",
     dataType: "jsonp",
     success: function (data) {
+      console.log("youtube resp", data);
       var ret = {
         type : 'youtube',
         title: data.entry.title.$t,
         author: data.entry.author[0].name.$t,
-        duration: data.entry.media$group.yt$duration.seconds
+        duration: data.entry.media$group.yt$duration.seconds,
+        img: data.entry.media$group.media$thumbnail[0].url
       }
       callback.call(null, ret);
     }
