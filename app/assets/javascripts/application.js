@@ -18,5 +18,5 @@
 //= require_tree .
 
 $().ready(function(){
-	var main = new Main();
+	main = new Main();
 })

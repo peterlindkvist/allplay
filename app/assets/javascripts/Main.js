@@ -61,7 +61,7 @@ Main.prototype.setupEvents = function() {
     .on("click", ".js-add-song", function(e) {
       //var $input = $('#' + $(this).data('input'));
       var url = prompt("URL: ");//$input.val();
-      if (url) self.addSong(url);
+	  if (url) self.addSong(url);
     });
 
   $(document).on("keyup", function(e) {
@@ -161,8 +161,7 @@ Main.prototype.stop = function() {
 };
 
 Main.prototype.addSong = function(url) {
-  var self = this;
-
+  var self = this;	
   PlayerFactory.getMetaData(url, function(data) {
     var data = {
       song : {
@@ -174,7 +173,7 @@ Main.prototype.addSong = function(url) {
         list_id : document.location.hash.substr(1)
       }
     };
-
+	
     $.ajax({
       url : '/songs',
       data : data,
