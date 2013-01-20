@@ -87,6 +87,13 @@ players.SpotifyPlayer.prototype.pause = function(){
   })
 };
 
+players.SpotifyPlayer.prototype.togglePause = function(){
+  this.isPlaying
+    ? this.pause()
+    : this.play();
+};
+
+
 players.SpotifyPlayer.prototype.seek = function(){};
 
 players.SpotifyPlayer.prototype.dispose = function(){

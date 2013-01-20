@@ -17,12 +17,13 @@ players.BasicPlayer = function(url,id){
 		self.callback.onEnd(self._id);
 	}, false);
 
-	this._sound.addEventListener('play', function() { 
+	this._sound.addEventListener('play', function() {
+    self._isPlaying = true;
 		self.callback.onPlay(self._id);
 	}, false);
 
-	this._sound.addEventListener('pause', function() { 
-		console.log('Basicplayer Pause');
+	this._sound.addEventListener('pause', function() {
+    self._isPlaying = false;
 		self.callback.onPause(self._id);
 	}, false);
 
@@ -46,8 +47,27 @@ players.BasicPlayer.prototype.pause = function(){
 	this._sound.pause();
 };
 
+players.BasicPlayer.prototype.togglePause = function(){
+  this._isPlaying
+    ? this.pause()
+    : this.play();
+};
+
+
 players.BasicPlayer.prototype.seek = function(){
 };
+
+players.BasicPlayer.prototype.getDuration = function() {
+  return this._sound.duration;
+};
+
+/**
+ * @return integer Position in seconds
+ */
+players.BasicPlayer.prototype.getPosition = function() {
+  return this._sound.currentTime;
+};
+
 
 players.BasicPlayer.prototype.dispose = function(){
 	this._sound.pause();
