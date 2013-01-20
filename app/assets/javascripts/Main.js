@@ -221,6 +221,7 @@ Main.prototype.addSong = function(url) {
         author : data.author,
         duration : data.duration,
         playertype : data.type,
+        img: data.img,
         url : url,
         list_id : document.location.hash.substr(1)
       }
@@ -231,7 +232,7 @@ Main.prototype.addSong = function(url) {
       data : data,
       type : 'post',
       success: function() {
-        console.log("added");
+        //console.log("added");
       }
     });
 
