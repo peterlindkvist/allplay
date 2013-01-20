@@ -76,7 +76,7 @@ Main.prototype.setupEvents = function() {
       if (url) self.addSong(url);
     }).on("click", ".js-add-playlist", function(e) {
       //var $input = $('#' + $(this).data('input'));
-      var url = prompt("URL: ");//$input.val();
+      var url = prompt("NAME: ");//$input.val();
       if (url) self.addPlaylist(url);
     });
 
@@ -224,7 +224,7 @@ Main.prototype.addPlaylist = function(name){
     type : 'post',
     success: function(data) {
       self.pause();
-      document.location.hash = data.id
+      document.location.hash = data.slug
     }
   });
 
