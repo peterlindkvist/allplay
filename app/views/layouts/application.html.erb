@@ -2,15 +2,10 @@
 <html>
 <head>
   <title>Allplay</title>
-
-    <script src="http://cdn.pubnub.com/pubnub-3.4.min.js"></script>
-
   <% if Rails.env.production? %>
-     <script src="/static/application.js?v=1" type="text/javascript"></script>
      <link href="/static/application.css?v=1" media="all" rel="stylesheet" type="text/css" />
   <% else %>
     <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
   <% end %>
   <%= csrf_meta_tags %>
 </head>
@@ -20,8 +15,11 @@
     <%= yield %>
   </div>
 
-  <script>
-    
-  </script>
+  <script src="http://cdn.pubnub.com/pubnub-3.4.min.js"></script>
+  <% if Rails.env.production? %>
+     <script src="/static/application.js?v=1" type="text/javascript"></script>
+   <% else %>
+    <%= javascript_include_tag "application" %>
+  <% end %>
 </body>
 </html>
