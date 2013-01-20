@@ -1,4 +1,4 @@
-Main = function(){
+	Main = function(){
   var self = this;
 
   window.onhashchange =  function(){
@@ -62,19 +62,27 @@ Main.prototype.setupEvents = function() {
     })
     .on("click", ".js-play_item_button", function(e) {
       e.preventDefault();
-
       self._index = $(this).data('id');
       self.playNext();
     })
     .on("click", ".js-add-song", function(e) {
       //var $input = $('#' + $(this).data('input'));
       var url = prompt("URL: ");//$input.val();
-      if (url) self.addSong(url);
-    }).on("click", ".js-add-playlist", function(e) {
-      //var $input = $('#' + $(this).data('input'));
-      var url = prompt("NAME: ");//$input.val();
-      if (url) self.addPlaylist(url);
+	  if (url) self.addSong(url);
+    })
+    .on("drop", ".js-add-song", function(e) {
+		e.stopPropagation();
+	    e.preventDefault();
+		url = e.originalEvent.dataTransfer.getData("Text");
+		console.log(url);
+		if (url) self.addSong(url)
+		
+    })
+	.on("dragover", ".js-add-song", function(e) {
+		e.stopPropagation();
+	    e.preventDefault();
     });
+;
 
 
   $(document)
