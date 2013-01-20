@@ -62,7 +62,7 @@ players.SoundCloudPlayer.prototype.prepareForPlayback = function(callback) {
 
   if (!this._soundObj.trackData) {
     SC.get("/resolve", { url: this._soundObj.uri }, function(trackData) {
-      //console.log("SCPlayer - resolved track data: ", trackData);
+      console.log("SCPlayer - resolved track data: ", trackData);
       self._soundObj.trackData = trackData;
       self.prepareForPlayback(callback);
     });
