@@ -1,0 +1,41 @@
+{
+	"AppDescription": {
+		"en": "App to remote use of the js api"
+	},
+	"AppIcon": {
+		"36x18": "tutorial.png"
+	},
+	"AppName": {
+		"en": "Remote api"
+	},
+	"BundleIdentifier": "remote",
+	"BundleType": "Application",
+	"BundleVersion": "0.1",
+	"DefaultTabs": [
+		{
+			"arguments": "index",
+			"title": {
+				"en": "Home"
+			}
+		},
+		{
+			"arguments": "tabs",
+			"title": {
+				"en": "How to use tabs"
+			}
+        }
+	],
+	"Dependencies": {
+	  "api": "0.2.3",
+	  "util": "0.1.0",
+	  "resources": "0.2.2"
+  },
+	"RequiredInterface": 1,
+	"RequiredPermissions": [
+	    "http://*.pubnub.com"
+	],
+	"SupportedLanguages": [
+		"en"
+	],
+  "VendorIdentifier" : "se.superkrut"
+}

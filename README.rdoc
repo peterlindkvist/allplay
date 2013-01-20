@@ -10,6 +10,12 @@ NOTE! MacOSX might require something like this:
 sudo sysctl -w kern.sysv.shmmax=16777216;
 sudo sysctl -w kern.sysv.shmall=4096;
 
+== Install spotify app
+ 1. Sign up for a [developer account on Spotify](http://developer.spotify.com/en/spotify-apps-api/developer-signup/)
+ 2. Open Terminal, `mkdir ~/Spotify`
+ 3. cp /doc/remote-api ~/Spotify
+ 4. open the app with the string the page presents.
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create

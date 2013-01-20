@@ -60,13 +60,12 @@ players.YoutubePlayer.prototype.pause = function(){
 };
 
 players.YoutubePlayer.prototype.togglePause = function(){
-  console.log("togglePause");
   this._isPlaying
     ? this.pause()
     : this.play();
 };
 
-players.YoutubePlayer.prototype.seek = function(){};
+players.YoutubePlayer.prototype.seek = function() {};
 
 players.YoutubePlayer.prototype.dispose = function(){
   this._player.clearVideo();
