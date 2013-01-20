@@ -1,10 +1,14 @@
-{
-  "name": "Fallback Playlist",
-  "songs": [
+{"created_at":"2013-01-20T11:58:41Z", "id":15, "name":"fallback playlist", "slug":"", "updated_at":"2013-01-20T11:58:41Z", "songs":[
     {
-        "url" : "http://open.spotify.com/track/5E8pXD9M4k3IcCr9GtJnIj",
-        "title" : "Spotify Clip",
-        "duration": 0
+        "author":"Andrew Bird",
+        "created_at":"2013-01-20T12:23:17Z",
+        "duration":194,
+        "id":41,
+        "img":"http://i1.sndcdn.com/artworks-000030136212-iy2bbf-large.jpg?0c1a674",
+        "list_id":15,
+        "playertype":"soundcloud",
+        "title":"Three White Horses",
+        "updated_at":"2013-01-20T12:23:17Z",
+        "url":"https://soundcloud.com/andrewbird/three-white-horses"
     }
-  ]
-}
+]}
