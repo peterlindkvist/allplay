@@ -235,7 +235,7 @@ Main.prototype.addSong = function(url) {
         playertype : data.type,
         img: data.img,
         url : url,
-        list_id : document.location.hash.substr(1)
+        list_id : self._playlist.id
       }
     };
 
