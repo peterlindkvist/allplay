@@ -4,12 +4,20 @@
     {
         "url" : "Brastart.mp3",
         "title" : "Mp3",
-        "duration": "00:00",
-        "position": "00:00"
+        "duration": "0",
+	},
+        "url" : "http://open.spotify.com/track/5E8pXD9M4k3IcCr9GtJnIj",
+        "title" : "Spotify Clip",
+        "duration": 0
     },
     {
         "url" : "https://soundcloud.com/fatpossum/dropla",
         "title" : "SoundCloud Clip",
+        "duration": 0
+    },
+    {
+        "url" : "http://open.spotify.com/track/0tDoBMgyAzGgLhs73KPrJL",
+        "title" : "Spotify Clip 2",
         "duration": 0
     },
     {

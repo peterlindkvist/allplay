@@ -13,6 +13,7 @@
 //= require jquery
 //= require libs/handlebars.runtime.js
 //= require libs/swfobject.js
+//= require libs/jquery.cookie.js
 //= require_tree ./templates
 //= require_tree .
 

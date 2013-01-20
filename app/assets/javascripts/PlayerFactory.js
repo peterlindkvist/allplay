@@ -6,7 +6,6 @@ PlayerFactory.resolve = function(url){
   }
 
   if (players.SoundCloudPlayer.supportsURL(url)) {
-    console.log("SCPlayer supports URL");
     return new players.SoundCloudPlayer(url);
   }
 
@@ -21,9 +20,11 @@ PlayerFactory.resolve = function(url){
    return new players.Buzz(url);
   }
   
-  throw new Error('NO PLAYER FOUND');	
+  if (players.SpotifyPlayer.supportsURL(url)) {
+    return new players.SpotifyPlayer(url);
+  }
 
-  if (players.BasicPlayer.supportsURL(url)){
+  if (players.BasicPlayer.supportsURL(url))
     return new players.BasicPlayer(url);
   };
 
@@ -42,6 +43,9 @@ PlayerFactory.getMetaData = function(url, callback){
 
   if (players.Buzz.supportsURL(url))
     return players.Buzz.getMetaData(url, callback);
+
+  if (players.SpotifyPlayer.supportsURL(url))
+    return players.SpotifyPlayer.getMetaData(url, callback);
 
 
   throw new Error('NO PLAYER FOUND');	
