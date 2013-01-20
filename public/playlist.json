@@ -4,8 +4,9 @@
     {
         "url" : "Brastart.mp3",
         "title" : "Mp3",
-        "duration": "0",
-	},
+        "duration": "0"
+    },
+    {
         "url" : "http://open.spotify.com/track/5E8pXD9M4k3IcCr9GtJnIj",
         "title" : "Spotify Clip",
         "duration": 0

@@ -9,6 +9,10 @@ PlayerFactory.resolve = function(url){
     return new players.SoundCloudPlayer(url);
   }
 
+  if (players.RdioPlayer.supportsURL(url)) {
+    return new players.RdioPlayer(url);
+  }
+
   //have to be before Buzz
   if (players.LocalFilePlayer.supportsUrl(url)){
    console.log('LocalFileLoader'); 
@@ -37,6 +41,9 @@ PlayerFactory.getMetaData = function(url, callback){
 
   if (players.SoundCloudPlayer.supportsURL(url))
     return players.SoundCloudPlayer.getMetaData(url, callback);
+
+  if (players.RdioPlayer.supportsURL(url))
+    return players.RdioPlayer.getMetaData(url, callback);
 
   if (players.LocalFilePlayer.supportsUrl(url))
     return players.LocalFilePlayer.getMetaData(url, callback);
