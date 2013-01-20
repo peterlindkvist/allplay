@@ -37,7 +37,7 @@ Main.prototype.start = function(){
   $(".js-list").html(HandlebarsTemplates.list(this._playlist));
 
 
-  this.loadNext();
+  this.loadNext(false);
 };
 
 Main.prototype.setupEvents = function() {
@@ -47,7 +47,7 @@ Main.prototype.setupEvents = function() {
     .on("click", ".js-list_item", function(e) {
       e.preventDefault();
       self._index = $(e.currentTarget).index();
-      self.loadNext();
+      self.loadNext(true);
     })
     .on("click", ".js-play_button", function(e) {
       e.preventDefault();
@@ -67,17 +67,22 @@ Main.prototype.setupEvents = function() {
     })
     .on("click", ".js-previous_button", function(e) {
       e.preventDefault();
-      this.playPrevious();
+      self.playPrevious();
     })
     .on("click", ".js-play_item_button", function(e) {
       e.preventDefault();
-      self.loadNext();
+      self.loadNext(true);
     })
     .on("click", ".js-add-song", function(e) {
       //var $input = $('#' + $(this).data('input'));
-      var url = prompt("URL: ");//$input.val();
+      var url = prompt("Enter URL: ");//$input.val();
       if (url) self.addSong(url);
+    }).on("click", ".js-add-playlist", function(e) {
+      //var $input = $('#' + $(this).data('input'));
+      var name = prompt("Enter name of playlist: ");//$input.val();
+      if (name) self.addPlaylist(name);
     })
+
     .on("drop", ".js-add-song", function(e) {
       e.stopPropagation();
       e.preventDefault();
@@ -119,15 +124,15 @@ Main.prototype.setupEvents = function() {
 
 Main.prototype.playPrevious = function() {
   this._index--;
-  this.loadNext();
+  this.loadNext(true);
 };
 
 Main.prototype.playNext = function() {
   this._index++;
-  this.loadNext();
+  this.loadNext(true);
 };
 
-Main.prototype.loadNext = function() {
+Main.prototype.loadNext = function(startplay) {
   if (this._playlist.songs.length === 0) return;
 
   var self = this;
@@ -148,12 +153,16 @@ Main.prototype.loadNext = function() {
 
   var url = this._playlist.songs[this._index].url;
   this._currentPlayer = PlayerFactory.resolve(url, this._index);
-  this.setLoadingStateForCurrentItem(true);
+  if(startplay){
+    this.setLoadingStateForCurrentItem(true);
+  }
 
   this._currentPlayer.callback.onReady = function(id){
-    self.play();
-    self.setLoadingStateForCurrentItem(false);
-    $('.js-list-item-'+self._index).addClass('playing').removeClass('pausing');
+    if(startplay){
+      self.play();
+      self.setLoadingStateForCurrentItem(false);
+      $('.js-list-item-'+self._index).addClass('playing').removeClass('pausing');
+    }
   };
 
   this._currentPlayer.callback.onPlay = function(id) {
@@ -183,10 +192,9 @@ Main.prototype.loadNext = function() {
       this._setPositionInterval = null;
     }
 
-    console.log("onEnd");
     $('.js-list-item-'+self._index).removeClass('pausing').removeClass('playing');
     self._index ++;
-    self.loadNext();
+    self.loadNext(true);
   };
 };
 
