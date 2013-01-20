@@ -1,13 +1,12 @@
 <li class="js-list-item-{{id}} block list_item padding_1" data-id="{{id}}">
-  <strong class="block fs18 lh1_5">{{title}}</strong>
   <div class="units u10">
     <div class="unit span_9">
+      <strong class="block fs18 lh1_5">{{title}}</strong>
       <span class="js-position">{{formatTime position}}</span> /
       <span class="js-duration align_right">{{formatTime duration}}</span>
-    </div>
-    <div class="unit">
       <!--<a href="#" class="js-play_item_button play_item_button unit
         align_right border_0" data-id="{{id}}">Play</a>-->
     </div>
+    <div class="js-spinner_container unit border_box" style="padding: 23px 0 0 45px"></div>
   </div>
 </li>
