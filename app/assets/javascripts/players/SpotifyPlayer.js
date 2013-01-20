@@ -134,7 +134,7 @@ players.SpotifyPlayer.getMetaData = function(url, callback){
   var id = this._getID(url)
   var full = 'http://ws.spotify.com/lookup/1/.json?uri=spotify:track:' + id;
   $.ajax({
-    url : 'http://localhost:3000/spotify_image?url=' + url,
+    url : '/spotify_image?url=' + url,
     dataType : 'text',
     success : function(data){
       var img = data;
