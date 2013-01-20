@@ -117,8 +117,6 @@ Main.prototype.setupEvents = function() {
     });
 };
 
-Main.prompt
-
 Main.prototype.playPrevious = function() {
   this._index--;
   this.loadNext();
