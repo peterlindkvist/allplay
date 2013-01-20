@@ -131,6 +131,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .full_height { height: 100% }
 .max_width {
   width: $max_width;
+  max-width: 100%;
   &.absolute.margin_h_auto, &.fixed.margin_h_auto {
     left: 50%;
     margin-left: -#{$max_width/2};

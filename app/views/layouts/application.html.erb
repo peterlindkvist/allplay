@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Allplay</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <% if Rails.env.production? %>
      <link href="/static/application.css?v=1" media="all" rel="stylesheet" type="text/css" />
   <% else %>
@@ -11,7 +12,7 @@
 </head>
 <body>
 
-  <div class="max_width margin_h_auto margin_v_4">
+  <div class="max_width border_box padding_h_2 margin_h_auto margin_v_4">
     <%= yield %>
   </div>
 
