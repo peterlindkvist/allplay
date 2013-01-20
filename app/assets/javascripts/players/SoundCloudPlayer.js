@@ -188,7 +188,8 @@ players.SoundCloudPlayer.getMetaData = function(url, callback) {
       $.extend(trackData, {
         type: "soundcloud",
         author: trackData.user.username,
-        img: trackData.artwork_url
+        img: trackData.artwork_url,
+        duration: trackData.duration / 1000
       });
       callback(trackData);
     });
