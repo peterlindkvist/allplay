@@ -23,16 +23,17 @@ PlayerFactory.resolve = function(url){
    console.log('Buzz'); 
    return new players.Buzz(url);
   }
-  
+
   if (players.SpotifyPlayer.supportsURL(url)) {
     return new players.SpotifyPlayer(url);
   }
 
   if (players.BasicPlayer.supportsURL(url)){
     return new players.BasicPlayer(url);
-  };
+  }
 
-  return new players.IPlayer(url);
+  return null;
+  //return new players.IPlayer(url);
 };
 
 PlayerFactory.getMetaData = function(url, callback){

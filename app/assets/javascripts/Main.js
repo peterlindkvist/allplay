@@ -148,6 +148,8 @@ Main.prototype.loadNext = function() {
 
   var url = this._playlist.songs[this._index].url;
   this._currentPlayer = PlayerFactory.resolve(url, this._index);
+  if (!this._currentPlayer) this.playNext();
+
   this.setLoadingStateForCurrentItem(true);
 
   this._currentPlayer.callback.onReady = function(id){

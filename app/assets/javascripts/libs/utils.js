@@ -17,3 +17,7 @@ Utils.zeroPad = function(number) {
   if (number < 10) return "0"+number;
   return String(number);
 };
+
+Utils.isMobile = function() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+};
