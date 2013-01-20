@@ -1,4 +1,4 @@
-<li class="js-list_item js-list-item-{{id}} block list_item padding_1 pointer" data-id="{{id}}">
+<li class="js-list_item js-list-item-{{id}} block list_item padding_1 pointer relative" data-id="{{id}}">
   <div class="units u10">
     <div class="unit span_9">
       <img src="{{img}}" alt="" class="left margin_right_1" style="height: 48px">
@@ -7,6 +7,7 @@
       <span class="js-duration align_right">{{formatTime duration}}</span>
       <!--<a href="#" class="js-play_item_button play_item_button unit
         align_right border_0" data-id="{{id}}">Play</a>-->
+        <div class="absolute bottomright margin_right_1 margin_bottom_1 text_gray">{{url}}</div>
     </div>
     <div class="js-spinner_container unit border_box" style="padding: 23px 0 0 45px"></div>
   </div>
