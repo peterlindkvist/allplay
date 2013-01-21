@@ -127,11 +127,11 @@ players.SpotifyPlayer.prototype._send = function(message){
 
 
 players.SpotifyPlayer.supportsURL = function(url){
-  return url.indexOf("spotify.com") != -1 && !Utils.isMobile();
+  return (url.indexOf("spotify.com") != -1 || url.indexOf("spotify:") > -1) && !Utils.isMobile();
 };
 
 players.SpotifyPlayer.getMetaData = function(url, callback){
-  var id = this._getID(url)
+  var id = this._getID(url);
   var full = 'http://ws.spotify.com/lookup/1/.json?uri=spotify:track:' + id;
   $.ajax({
     url : '/spotify_image?url=' + url,
