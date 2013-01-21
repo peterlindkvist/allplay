@@ -127,7 +127,7 @@ players.SpotifyPlayer.prototype._send = function(message){
 
 
 players.SpotifyPlayer.supportsURL = function(url){
-  return url.indexOf("spotify.com") != -1 && !Utils.isMobile();
+  return (url.indexOf("spotify.com") != -1 || url.indexOf("spotify:") > -1) && !Utils.isMobile();
 };
 
 players.SpotifyPlayer.getMetaData = function(url, callback){
